@@ -10,15 +10,16 @@ let inpBirthday = document.getElementById("character-birthday");
 let inpCategory = document.getElementById("character-category");
 
 let addForm = document.querySelector("#add-form");
-let sectionCards = document.getElementById("cards");
 
-let searchValue = ""; //переменная для поиска
+let search = "";
+const searchInp = document.querySelector("#search-inp");
+
 //кнопки для пагинации
 let prevBtn = document.getElementById("prevBtn");
 let nextBtn = document.getElementById("nextBtn");
 //переменная для пагинации
 let currentPage = 1;
-let countPage = 1;
+let category = "";
 
 //? CRUD characters
 
@@ -75,7 +76,14 @@ addForm.addEventListener("submit", addProduct);
 //! read
 
 async function render() {
-  let response = await fetch(CHARACTERS_API);
+  let sectionCards = document.getElementById("cards");
+
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=3`;
+  if (!category) {
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=3`;
+  }
+
+  let response = await fetch(requestAPI);
   let data = await response.json();
   sectionCards.innerHTML = "";
   data.forEach((card) => {
@@ -112,7 +120,7 @@ async function render() {
   });
 }
 
-render(); 
+render();
 
 //! delete
 
@@ -140,7 +148,7 @@ let editBirthday = document.querySelector("#editInpBirthday");
 let editCharacterCategory = document.querySelector("#editCharacterCategory");
 
 let editForm = document.querySelector("#edit-form");
-let editBtnSave = document.querySelector("#editBtnSave")
+let editBtnSave = document.querySelector("#editBtnSave");
 
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("btn-edit")) {
@@ -186,3 +194,9 @@ editForm.addEventListener("submit", async (e) => {
   render();
 });
 
+//search
+searchInp.addEventListener("input", () => {
+  search = searchInp.value;
+  currentPage = 1;
+  render();
+});
