@@ -53,18 +53,6 @@
                   >Home</a
                 >
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Category
-                </a>
-                <ul class="dropdown-menu"></ul>
-              </li>
               <li class="nav-item">
                 <a
                   class="nav-link active"
@@ -158,7 +146,7 @@
     <!-- navbat end -->
 
     <div class="main_cont mb-0 vw-100 position-absolute z-5 ">
-      <!-- admin panel start -->
+      <!-- !admin panel start -->
       <div
       id="admin-panel-card" class="justify-content-center text-center text-light admin-panel"
       >
@@ -199,14 +187,12 @@
             id="character-Weapon"
           />
 
-          <select class="mb-2 w-50 m-auto input-admin" style="color: gray;" id="character-category-region">
+          <select class="mb-2 w-50 m-auto input-admin" style="color: gray;" id="character-region">
             <option selected>Mondtadt</option>
             <option>Li Yue</option>
             <option>Inadzuma</option>
-            <option>To Sumer</option>
+            <option>Sumeru</option>
             <option>Fontaine</option>
-            <option>Piro Region</option>
-            <option>Snezhnaya</option>
           </select>
 
           <input
@@ -236,6 +222,50 @@
       </div>
       <!-- !admin panel end -->
 
+      <!-- !filtration start -->
+      <div
+     id="filtration" class="justify-content-center text-center text-light admin-panel"
+      >
+        <div class="mt-5 d-flex flex-column w-100" id="admin-panel">
+          <h2 class="panel-title">- Filtration -</h2>
+          <div class="filter-container">
+      <div class="filter-category">
+<h3>Coutries</h3>
+<div class="filter-btns">
+  <button class="one-btn-filter">Mondtadt</button>
+  <button class="one-btn-filter">Li Yue</button>
+  <button class="one-btn-filter">Inadzuma</button>
+  <button class="one-btn-filter">Sumeru</button>
+  <button class="one-btn-filter">Fontaine</button>
+</div>
+      </div>
+      <div class="filter-category">
+<h3>Elements</h3>
+<div class="filter-btns">
+  <button class="one-btn-filter">анемо</button>
+  <button class="one-btn-filter">пиро</button>
+  <button class="one-btn-filter">электро</button>
+  <button class="one-btn-filter">гидро</button>
+  <button class="one-btn-filter">гео</button>
+  <button class="one-btn-filter">крио</button>
+  <button class="one-btn-filter">дендро</button>
+</div>
+      </div>
+      <div class="filter-category">
+<h3>Weapon</h3>
+<div class="filter-btns">
+  <button class="one-btn-filter">Одноручное</button>
+  <button class="one-btn-filter">Двуручное</button>
+  <button class="one-btn-filter">Стрелковое</button>
+  <button class="one-btn-filter">Катализатор</button>
+  <button class="one-btn-filter">Древковое</button>
+</div>
+      </div>
+    </div>
+        </div>
+      </div>
+      <!-- !filtration end -->
+
       <!--! cards start -->
       <section class="mt-5 container-xll">
         <h2 class="text-center he">- Characters -</h2>
@@ -248,15 +278,18 @@
       <!--! pagination start -->
     <div
     style="
-      width: 10%;
+      width: 20%;
       margin: auto;
       display: flex;
       gap: 10px;
       margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+     justify-content: center;
     "
   >
     <button id="prev" class="btn btn-outline-light btn-dark">Prev</button>
-    <div id="page" style="color: white; border: 2px solid white; width: 40px; height: 40px;border-radius: 17px; margin-top: 8px; padding-top: 5px; padding-left: 13px;" >1</div>
+    <div id="page" style="color: white; border: 2px solid white; width: 40px; height: 40px; margin-top: 8px; padding-top: 5px; padding-left: 12px; border-radius: 15px;" >1</div>
     <button id="next" class="btn btn-outline-light btn-dark">Next</button>
   </div>
   <!-- ! pagination end -->

@@ -205,35 +205,38 @@ searchInp.addEventListener("input", () => {
 });
 
 //pagination
-nextPage.addEventListener("click", (e) => {
+async function getPagesCount() {
+  let res = await fetch(CHARACTERS_API);
+  let data = await res.json();
+  let pagesCount = Math.ceil(data.length / 6);
+  return pagesCount;
+};
+
+async function checkPages() {
+  let maxPagesNum = await getPagesCount();
+  if(currentPage === 1) {
+      prevPage.setAttribute('style', 'display: none;');
+      nextPage.setAttribute('style', 'display: block;');
+  } else if(currentPage === maxPagesNum) {
+      prevPage.setAttribute('style', 'display: block;');
+      nextPage.setAttribute('style', 'display: none;');
+  } else {
+      prevPage.setAttribute('style', 'display: block;');
+      nextPage.setAttribute('style', 'display: block;');
+  };
+};
+checkPages();
+
+prevPage.addEventListener('click', () => {
+  currentPage--;
+  pageDiv.innerText = currentPage;
+  checkPages();
+  render();
+});
+
+nextPage.addEventListener('click', () => {
   currentPage++;
   pageDiv.innerText = currentPage;
   checkPages();
   render();
 });
-
-prevPage.addEventListener("click", (e) => {
-  if (currentPage < 2) {
-    return;
-  }
-  checkPages();
-  currentPage--;
-  pageDiv.innerText = currentPage;
-
-  render();
-});
-
-async function checkPages() {
-  let res = await fetch(CHARACTERS_API);
-  let data = await res.json();
-  let pages = Math.ceil(data.length / 6);
-  if (currentPage === 1) {
-    prevPage.style.display = "none";
-    nextPage.style.display = "block";
-  } else if (currentPage === pages) {
-    nextPage.style.display = "none";
-    prevPage.style.display = "block";
-  }
-}
-
-checkPages();
