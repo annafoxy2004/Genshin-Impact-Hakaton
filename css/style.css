@@ -1378,3 +1378,54 @@ a {
 .one-btn-filter:active {
   transform: scale(0.9);
 }
+/* Modal Register */
+
+.modalka-bg {
+  display: none;
+  background: #00000078;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.modalka {
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  width: 30%;
+  gap: 40px;
+  border-radius: 8px;
+  margin: 30px auto;
+}
+
+.modalka h2 {
+  font-family: sans-serif;
+  color: #3d30a2;
+  font-weight: 550;
+}
+
+#registerForm {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* cart */
+#cartModalBtn {
+  display: none;
+}

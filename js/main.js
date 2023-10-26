@@ -8,6 +8,7 @@ let inpWeapon = document.getElementById("character-Weapon");
 let inpRegion = document.getElementById("character-region");
 let inpBirthday = document.getElementById("character-birthday");
 let inpCategory = document.getElementById("character-category");
+const adminPanel = document.querySelector("#admin-panel-card")
 
 let addForm = document.querySelector("#add-form");
 
@@ -26,6 +27,30 @@ let category = "";
 //? CRUD characters
 
 //!create
+
+function initStorege() {
+  if (!localStorage.getItem("user")) {
+    localStorage.setItem("user", "{}");
+  }
+}
+
+initStorege();
+
+function checkUserAccess() {
+  let user = JSON.parse(localStorage.getItem("user"));
+  if(user) return user.isAdmin
+  return false
+}
+
+function showAdminPanel() {
+  if (!checkUserAccess()) {
+    adminPanel.style.display = "none";
+  } else {
+    adminPanel.style.display = "block";
+  }
+}
+
+showAdminPanel()
 
 async function addProduct(e) {
   e.preventDefault();
@@ -104,13 +129,17 @@ async function render() {
           </div>
       </div>
       <div class="w-100 d-flex flex-row flex-wrap  batton-crad">
-        <button class="mb-2 btn btn-outline-danger btn-delete" id="${card.id}">
+      ${
+        checkUserAccess()
+        ? `<button class="mb-2 btn btn-outline-danger btn-delete" id="${card.id}">
           Delete
         </button>
         <button class="btn btn-outline-warning btn-edit" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Edit
-        </button>
-        <button class="btn mt-2 btn-light btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+         </button>`
+         : ""
+      }
+        <button class="btn mt-2 btn-outline-primary btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Description
         </button>
         <button class="btn mt-2 btn-light btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -240,3 +269,18 @@ nextPage.addEventListener('click', () => {
   checkPages();
   render();
 });
+
+async function checkPages() {
+  let res = await fetch(CHARACTERS_API);
+  let data = await res.json();
+  let pages = Math.ceil(data.length / 6);
+  if (currentPage === 1) {
+    prevPage.style.display = "none";
+    nextPage.style.display = "block";
+  } else if (currentPage === pages) {
+    nextPage.style.display = "none";
+    prevPage.style.display = "block";
+  }
+}
+
+checkPages();
