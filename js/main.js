@@ -14,9 +14,11 @@ let addForm = document.querySelector("#add-form");
 let search = "";
 const searchInp = document.querySelector("#search-inp");
 
-//кнопки для пагинации
-let prevBtn = document.getElementById("prevBtn");
-let nextBtn = document.getElementById("nextBtn");
+//pagination
+const nextPage = document.querySelector("#next");
+const prevPage = document.querySelector("#prev");
+const pageDiv = document.querySelector("#page");
+
 //переменная для пагинации
 let currentPage = 1;
 let category = "";
@@ -78,9 +80,9 @@ addForm.addEventListener("submit", addProduct);
 async function render() {
   let sectionCards = document.getElementById("cards");
 
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=3`;
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=3`;
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
   }
 
   let response = await fetch(requestAPI);
@@ -89,33 +91,34 @@ async function render() {
   data.forEach((card) => {
     sectionCards.innerHTML += `
     <div class="cardd m-5">
-        <span></span>
-                 <div class="content d-flex flex-column">
-                 <img src="${card.image}" class="w-30 detailsCard" style="height: 280px" alt=""/>
-                    <div class="w-30 card-body">
-                    <h5 class="card-title">${card.name}</h5>
-                    <p class="card-text">
-                    Price: ${card.price}$
-                    <br>
-                    Element: ${card.category}
-                    </p>
-                    <div class="d-flex flex-column">
-                    <button class="mb-2 btn btn-outline-danger btn-delete" id="${card.id}">
-                    Delete
-                    </button>
-                    <button class="btn btn-outline-warning btn-edit" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Edit
-                    </button>
-                    <button class="btn mt-2 btn-outline-primary btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    Description
-                    </button>
-                    <button class="btn mt-2 btn-outline-primary btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    Add to cart
-                    </button>
-                    </div>
-                    </div>
-                    </div>
-             </div>
+    <div class="content d-flex flex-column">
+      <div class="content d-flex align-items-start m-2">
+        <img src="${card.image}" class="detailsCard imageCard" alt="${card.image}"/>
+          <div class="text-card">
+            <h5 style="font-size: 30px" class="card-title">${card.name}</h5>
+            <p class="card-text">
+              Price: ${card.price}$
+            <br>
+              Element: ${card.category}
+           </p>
+          </div>
+      </div>
+      <div class="w-100 d-flex flex-row flex-wrap  batton-crad">
+        <button class="mb-2 btn btn-outline-danger btn-delete" id="${card.id}">
+          Delete
+        </button>
+        <button class="btn btn-outline-warning btn-edit" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Edit
+        </button>
+        <button class="btn mt-2 btn-outline-primary btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          Description
+        </button>
+        <button class="btn mt-2 btn-outline-primary btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+          Add to cart
+        </button>
+        </div>
+    </div>
+  </div>
     `;
   });
 }
@@ -200,3 +203,37 @@ searchInp.addEventListener("input", () => {
   currentPage = 1;
   render();
 });
+
+//pagination
+nextPage.addEventListener("click", () => {
+  currentPage++;
+  pageDiv.innerText = currentPage;
+  checkPages();
+  render();
+});
+
+prevPage.addEventListener("click", () => {
+  if (currentPage < 2) {
+    return;
+  }
+  checkPages();
+  currentPage--;
+  pageDiv.innerText = currentPage;
+
+  render();
+});
+
+async function checkPages() {
+  let res = await fetch(CHARACTERS_API);
+  let data = await res.json();
+  let pages = Math.ceil(data.length / 6);
+  if (currentPage === 1) {
+    prevPage.style.display = "none";
+    nextPage.style.display = "block";
+  } else if (currentPage === pages) {
+    nextPage.style.display = "none";
+    prevPage.style.display = "block";
+  }
+}
+
+checkPages();
