@@ -1100,9 +1100,11 @@ button:hover .star-6 {
 }
 
 .navbar {
+  position: fixed;
   z-index: 2;
   top: 0;
-  /* background-color: rgba(0, 0, 0, 0.8); */
+  background-color: rgba( 0, 0, 0, 0.5);
+  width: 100%;
   height: 10%;
 }
 
@@ -1180,16 +1182,39 @@ video {
   height: 100%;
 }
 
-.cards {
+.imageCard{
+  height: 60vh;
+  border-radius: 2%;
+  margin-right: 6%;
+}
+
+.text-card h5{
+  margin-bottom: 100%;
+}
+.text-card p{ 
+  font-size: 30px;
+}
+
+.batton-crad button{
+  width: 45%;
+  height: 30%;
+  /* margin-bottom: 20px; */
+  margin-right: 2%;
+  margin-left: 2%; 
+}
+
+#cards{
   width: 100%;
-  height: 100%;
-  margin: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
 }
 
 .cardd {
   position: relative;
-  width: 50%;
-  height: 50%;
+  z-index: 1;
+  width: 42%;
+  height: 100%;
   color: #fff;
   transition: 0.5s;
   cursor: pointer;
@@ -1206,7 +1231,7 @@ video {
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(45deg, #2660ff, #22ecc4);
+  background: linear-gradient(45deg, #6a5acd, #6a5acd); 
   border-radius: 1.2em;
 }
 
@@ -1217,7 +1242,7 @@ video {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #2660ff, #22ecc4);
+  background: linear-gradient(45deg, #6a5acd, #6a5acd);
   filter: blur(30px);
 }
 
@@ -1227,7 +1252,7 @@ video {
   left: 6px;
   right: 6px;
   bottom: 6px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 2;
   border-radius: 1em;
 }
@@ -1239,7 +1264,7 @@ video {
   left: 0;
   width: 50%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(85, 73, 163, 0.8);
 }
 
 .cardd .content {
@@ -1262,4 +1287,24 @@ a{
 
 .he{
 color: #fff;
+}
+
+#admin-panel-card{
+  height: 85%;
+  width: 95%;
+  margin-left: 2.5%;
+  background-color: rgba( 0, 0, 0, 0.5);
+  border-radius: 50% 20% / 10% 40%;
+  border: 6px solid #6a5acd;
+}
+
+.input-admin{
+  height: 3rem;
+  background-color: transparent;
+  border: 3px solid #6a5acd;
+  border-radius: 5px;
+}
+
+.input-admin:hover{
+  background-color: whitesmoke;
 }
