@@ -270,33 +270,7 @@ nextPage.addEventListener('click', () => {
   render();
 });
 
-prevPage.addEventListener("click", (e) => {
-  if (currentPage < 2) {
-    return;
-  }
-  checkPages();
-  currentPage--;
-  pageDiv.innerText = currentPage;
-
-  render();
-});
-
-async function checkPages() {
-  let res = await fetch(CHARACTERS_API);
-  let data = await res.json();
-  let pages = Math.ceil(data.length / 6);
-  if (currentPage === 1) {
-    prevPage.style.display = "none";
-    nextPage.style.display = "block";
-  } else if (currentPage === pages) {
-    nextPage.style.display = "none";
-    prevPage.style.display = "block";
-  }
-}
-
-checkPages();
-
-// Register logic start
+// !Register logic start
 
 const modalReg = document.querySelector("#modalRegister");
 const modalBg = document.querySelector(".modalka-bg");
