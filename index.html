@@ -85,16 +85,14 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" id="showUsername">No user</a>
+                <a class="nav-link disabled" id="showUsername"></a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link active"
                   aria-current="page"
                   href="#"
-                  id="cartModal-btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#cartModal"
+                  id="basketBtn"
                   ><img src="./images/basket.svg" alt="basket"></a
                 >
               </li>
@@ -144,6 +142,41 @@
     </div>
     </div>
     <!-- navbat end -->
+
+    <!--! register panel start -->
+
+    <div id="modalRegister" class="modalka-bg">
+      <div class="modalka">
+        <h2>Register</h2>
+        <form id="registerForm">
+          <input type="text" id="username" placeholder="username" />
+          <input type="number" id="age" placeholder="age" />
+          <input type="password" id="pass" placeholder="password" />
+          <input type="password" id="passConf" placeholder="password confirm" />
+          <label for="isAdmin">Admin</label>
+          <input id="isAdmin" type="checkbox" />
+          <button type="submit" class="regBtn">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- register panel end -->
+
+    <!--! login panel start -->
+
+    <div id="modalLogin" class="modalka-bg">
+      <div class="modalka">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <input type="text" id="userLogin" placeholder="username" />
+
+          <input type="password" id="passLogin" placeholder="enter password" />
+          <button id="loginSubmit" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- login panel end -->
 
     <div class="main_cont mb-0 vw-100 position-absolute z-5 ">
       <!-- !admin panel start -->
