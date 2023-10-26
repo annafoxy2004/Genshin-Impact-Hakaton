@@ -205,14 +205,14 @@ searchInp.addEventListener("input", () => {
 });
 
 //pagination
-nextPage.addEventListener("click", () => {
+nextPage.addEventListener("click", (e) => {
   currentPage++;
   pageDiv.innerText = currentPage;
   checkPages();
   render();
 });
 
-prevPage.addEventListener("click", () => {
+prevPage.addEventListener("click", (e) => {
   if (currentPage < 2) {
     return;
   }
