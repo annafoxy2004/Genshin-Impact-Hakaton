@@ -110,10 +110,10 @@ async function render() {
         <button class="btn btn-outline-warning btn-edit" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Edit
         </button>
-        <button class="btn mt-2 btn-outline-primary btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button class="btn mt-2 btn-light btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Description
         </button>
-        <button class="btn mt-2 btn-outline-primary btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button class="btn mt-2 btn-light btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Add to cart
         </button>
         </div>

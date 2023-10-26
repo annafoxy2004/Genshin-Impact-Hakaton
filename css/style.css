@@ -1308,3 +1308,15 @@ color: #fff;
 .input-admin:hover{
   background-color: whitesmoke;
 }
+
+.btnDesc{
+  background-color: transparent;
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+.btn-add-to-cart{
+  background-color: transparent;
+  border: 3px solid black;
+  border-radius: 5px;
+}
