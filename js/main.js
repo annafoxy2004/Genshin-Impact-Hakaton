@@ -23,10 +23,8 @@ const pageDiv = document.querySelector("#page");
 let currentPage = 1;
 
 //!filtration
-// const radios = document.querySelectorAll("input[type='radio']");
 let category = "";
-// let region = "";
-// let weapon = "";
+
 
 //? CRUD characters
 
