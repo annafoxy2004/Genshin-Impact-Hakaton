@@ -113,9 +113,9 @@ addForm.addEventListener("submit", addProduct);
 //! read
 let sectionCards = document.getElementById("cards");
 async function render(d) {
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`
   }
 
   let response = await fetch(requestAPI);
@@ -154,11 +154,10 @@ async function render(d) {
         }" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Description
         </button>
-        <button class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
+        <button 
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
           Add to cart
         </button>
-        
-    
         </div>
     </div>
   </div>
@@ -247,6 +246,53 @@ searchInp.addEventListener("input", () => {
   currentPage = 1;
   render();
 });
+
+
+//! voice search
+if ("webkitSpeechRecognition" in window) {
+  const startButton = document.getElementById("startButton");
+  const recognition = new webkitSpeechRecognition();
+
+  recognition.continuous = false;
+  recognition.lang = "ru-RU";
+  recognition.interimResults = true;
+
+  startButton.addEventListener("click", function () {
+    recognition.start();
+    startButton.disabled = true;
+    startButton.textContent = "Слушаем...";
+  });
+
+  recognition.onstart = function () {
+    console.log("Распознавание запущено");
+  };
+
+  recognition.onresult = function(event) {
+    const result = event.results[0][0].transcript;
+    console.log('Результат: ', result);
+    search  = result
+   
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.textContent = 'Начать поиск голосом';
+    render()
+  };
+
+
+  recognition.onerror = function (event) {
+    console.log("Ошибка распознавания: ", event.error);
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.textContent = "Начать поиск голосом";
+  };
+
+  recognition.onend = function () {
+    console.log("Распознавание завершено");
+  };
+} else {
+  alert("Web Speech API не поддерживается в этом браузере.");
+}
+
 
 //!pagination
 async function getPagesCount() {
@@ -564,156 +610,3 @@ btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
 })
 
-
-// !cart logic
-function checkLoginUser() {
-  let user = JSON.parse(localStorage.getItem('users'));
-  return user;
-};
-
-// add product to cart
-async function getOrderObjectById(id) {
-  let res = await fetch(`${CHARACTERS_API}/${id}`);
-  let characterObj = await res.json();
-  return characterObj;
-};
-
-function countCartTotalCost(characters) {
-  let cartTotalCost = characters.reduce((acc, currentItem) => {
-      return acc + currentItem.totalCost;
-  }, 0);
-  return cartTotalCost;
-};
-
-function addNewCharacterToCart(characterCartObj) {
-  let cartObj = JSON.parse(localStorage.getItem('cart'));
-  cartObj.character.push(characterCartObj);
-  cartObj.totalCost = countCartTotalCost(cartObj.character);
-  localStorage.setItem('cart', JSON.stringify(cartObj));
-};
-
-function addCartObjToLocalStorage() {
-  let cartOwner = JSON.parse(localStorage.getItem('users'));
-  let cartObj = {
-      id: Date.now(),
-      owner: cartOwner.username,
-      totalCost: 0,
-      character: []
-  };
-  localStorage.setItem('cart', JSON.stringify(cartObj));
-};
-
-async function addCharacterToCart(e) {
-  let characterId = e.target.id.split('-')[1];
-  let characterObj = await getOrderObjectById(characterId);
-  let cartCharacterCount = +prompt('Enter character count for cart');
-  let characterCartObj = {
-      count: cartCharacterCount,
-      totalCost: +characterObj.price * cartCharacterCount,
-      productItem: characterObj
-  };
-  let cartObj = JSON.parse(localStorage.getItem('cart'));
-  if(cartObj) {
-      addNewCharacterToCart(characterCartObj);
-  } else {
-      addCartObjToLocalStorage();
-      addNewCharacterToCart(characterCartObj);
-  };
-};
-
-function addCartEvent() {
-  let cartBtns = document.querySelectorAll('.btn-cart');
-  cartBtns.forEach(btn => btn.addEventListener('click', addCharacterToCart));
-};
-
-// render cart
-function cartRender() {
-  let cartObj = JSON.parse(localStorage.getItem('cart'));
-  if(!cartObj) {
-      cartTable.innerHTML = '<h3>No products in cart!</h3>';
-      cartTotalCost.innerText = 'Total cost: 0$';
-      return;
-  };
-  cartTable.innerHTML = `
-      <tr>
-          <th class="border border-dark">Image</th>
-          <th class="border border-dark">Title</th>
-          <th class="border border-dark">Count</th>
-          <th class="border border-dark">Price</th>
-          <th class="border border-dark">Total</th>
-          <th class="border border-dark">Delete</th>
-      </tr>
-  `;
-  cartObj.character.forEach(cartCharacter => {
-      cartTable.innerHTML += `
-      <tr>
-          <td class="border border-dark">
-          <img src=${cartCharacter.productItem.image} alt="error:(" width="50" height="50">
-          </td>
-          <td class="border border-dark">${cartCharacter.productItem.name}</td>
-          <td class="border border-dark">${cartCharacter.count}</td>
-          <td class="border border-dark">${cartCharacter.productItem.price}</td>
-          <td class="border border-dark">${cartCharacter.totalCost}</td>
-          <td class="border border-dark">
-          <button class="btn btn-danger del-cart-btn" id="cart-product-${cartCharacter.productItem.id}">DELETE</button>
-          </td>
-      </tr>
-      `;
-  });
-  cartTotalCost.innerText = `Total cost: ${cartObj.totalCost}$`;
-  addDeleteEventForCartProduct();
-};
-
-cartModalBtn.addEventListener('click', cartRender);
-
-// remove product from cart
-function deleteProductFromCart(e) {
-  let productId = e.target.id.split('-');
-  productId = productId[productId.length - 1];
-  let cartObj = JSON.parse(localStorage.getItem('cart'));
-  cartObj.character = cartObj.character.filter(cartProduct => cartProduct.productItem.id != productId);
-  cartObj.totalCost = countCartTotalCost(cartObj.character);
-  if(cartObj.character.length === 0) {
-      localStorage.removeItem('cart');
-  } else {
-      localStorage.setItem('cart', JSON.stringify(cartObj));
-  };
-  cartRender();
-};
-
-function addDeleteEventForCartProduct() {
-  let delCartProductBtns = document.querySelectorAll('.del-cart-btn');
-  delCartProductBtns.forEach(btn => btn.addEventListener('click', deleteProductFromCart));
-};
-
-// create order
-const ORDERS_API = 'http://localhost:8001/orders';
-
-async function sendOrder(cartObj) {
-  await fetch(ORDERS_API, {
-      method: 'POST',
-      body: JSON.stringify(cartObj),
-      headers: {
-          "Content-Type": "application/json;charset=utf-8"
-      }
-  });
-};
-
-async function createOrder() {
-  let cartObj = JSON.parse(localStorage.getItem('cart'));
-  if(!cartObj) {
-      alert('No products in cart!');
-      return;
-  };
-  await sendOrder(cartObj);
-  localStorage.removeItem('cart');
-  cartRender();
-};
-
-createCartOrderBtn.addEventListener('click', createOrder);
-
-// clean cart
-cleanCartBtn.addEventListener('click', () => {
-  localStorage.removeItem('cart');
-  cartRender();
-});
