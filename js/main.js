@@ -8,21 +8,23 @@ let inpWeapon = document.getElementById("character-Weapon");
 let inpRegion = document.getElementById("character-region");
 let inpBirthday = document.getElementById("character-birthday");
 let inpCategory = document.getElementById("character-category");
-const adminPanel = document.querySelector("#admin-panel-card")
+const adminPanel = document.querySelector("#admin-panel-card");
 
 let addForm = document.querySelector("#add-form");
 
+// !поиск
 let search = "";
 const searchInp = document.querySelector("#search-inp");
 
-//pagination
+//!pagination
 const nextPage = document.querySelector("#next");
 const prevPage = document.querySelector("#prev");
 const pageDiv = document.querySelector("#page");
-
-//переменная для пагинации
 let currentPage = 1;
+
+//!filtration
 let category = "";
+
 
 //? CRUD characters
 
@@ -38,8 +40,8 @@ initStorege();
 
 function checkUserAccess() {
   let user = JSON.parse(localStorage.getItem("user"));
-  if(user) return user.isAdmin
-  return false
+  if (user) return user.isAdmin;
+  return false;
 }
 
 function showAdminPanel() {
@@ -50,7 +52,7 @@ function showAdminPanel() {
   }
 }
 
-showAdminPanel()
+showAdminPanel();
 
 async function addProduct(e) {
   e.preventDefault();
@@ -101,10 +103,8 @@ async function addProduct(e) {
 addForm.addEventListener("submit", addProduct);
 
 //! read
-
-async function render() {
-  let sectionCards = document.getElementById("cards");
-
+let sectionCards = document.getElementById("cards");
+async function render(d) {
   let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
   if (!category) {
     requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
@@ -118,7 +118,9 @@ async function render() {
     <div class="cardd m-5">
     <div class="content d-flex flex-column">
       <div class="content d-flex align-items-start m-2">
-        <img src="${card.image}" class="detailsCard imageCard" alt="${card.image}"/>
+        <img src="${card.image}" class="detailsCard imageCard" alt="${
+      card.image
+    }"/>
           <div class="text-card">
             <h5 style="font-size: 30px" class="card-title">${card.name}</h5>
             <p class="card-text">
@@ -131,15 +133,17 @@ async function render() {
       <div class="w-100 d-flex flex-row flex-wrap  batton-crad">
       ${
         checkUserAccess()
-        ? `<button class="mb-2 btn btn-outline-danger btn-delete" id="${card.id}">
+          ? `<button class="mb-2 btn btn-outline-danger btn-delete" id="${card.id}">
           Delete
         </button>
         <button class="btn btn-outline-warning btn-edit" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Edit
          </button>`
-         : ""
+          : ""
       }
-        <button class="btn mt-2 btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button class="btn mt-2 btn-light btnDesc" id="${
+          card.id
+        }" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Description
         </button>
         <button class="btn mt-2 btn-light btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -150,6 +154,7 @@ async function render() {
   </div>
     `;
   });
+  addCategoryNomination();
 }
 
 render();
@@ -226,44 +231,44 @@ editForm.addEventListener("submit", async (e) => {
   render();
 });
 
-//search
+//!search
 searchInp.addEventListener("input", () => {
   search = searchInp.value;
   currentPage = 1;
   render();
 });
 
-//pagination
+//!pagination
 async function getPagesCount() {
   let res = await fetch(CHARACTERS_API);
   let data = await res.json();
   let pagesCount = Math.ceil(data.length / 6);
   return pagesCount;
-};
+}
 
 async function checkPages() {
   let maxPagesNum = await getPagesCount();
-  if(currentPage === 1) {
-      prevPage.setAttribute('style', 'display: none;');
-      nextPage.setAttribute('style', 'display: block;');
-  } else if(currentPage === maxPagesNum) {
-      prevPage.setAttribute('style', 'display: block;');
-      nextPage.setAttribute('style', 'display: none;');
+  if (currentPage === 1) {
+    prevPage.setAttribute("style", "display: none;");
+    nextPage.setAttribute("style", "display: block;");
+  } else if (currentPage === maxPagesNum) {
+    prevPage.setAttribute("style", "display: block;");
+    nextPage.setAttribute("style", "display: none;");
   } else {
-      prevPage.setAttribute('style', 'display: block;');
-      nextPage.setAttribute('style', 'display: block;');
-  };
-};
+    prevPage.setAttribute("style", "display: block;");
+    nextPage.setAttribute("style", "display: block;");
+  }
+}
 checkPages();
 
-prevPage.addEventListener('click', () => {
+prevPage.addEventListener("click", () => {
   currentPage--;
   pageDiv.innerText = currentPage;
   checkPages();
   render();
 });
 
-nextPage.addEventListener('click', () => {
+nextPage.addEventListener("click", () => {
   currentPage++;
   pageDiv.innerText = currentPage;
   checkPages();
@@ -415,7 +420,7 @@ function checkLoginLogoutStatus() {
     basketBtn.style.display = "block";
   }
 
-  showAdminPanel()
+  showAdminPanel();
 }
 
 checkLoginLogoutStatus();
@@ -478,7 +483,7 @@ logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");
   showAdminPanel();
   checkLoginLogoutStatus();
-  checkUserAccess()
+  checkUserAccess();
   render();
 });
 
@@ -492,5 +497,61 @@ document.addEventListener("click", async (e) => {
     await fetch(`${CHARACTERS_API}/${cardId}`, {
     });
     render();
-  }
+  }})
+//!filtration
+async function addCategoryNomination() {
+  let res = await fetch(CHARACTERS_API);
+  let data = await res.json();
+  let categories = new Set(data.map((product) => product.category));
+  addClickEventFiltration();
+}
+
+function addClickEventFiltration() {
+  let categoryItems = document.querySelectorAll(".one-btn-filter");
+  categoryItems.forEach((item) =>
+    item.addEventListener("click", function filterOnCategory(e) {
+      let categoryText = e.target.value;
+      if (categoryText === "all") {
+        category = "";
+      } else {
+        category = categoryText;
+      }
+
+      render();
+    })
+  );
+}
+
+//!background switch
+let btnAnemo = document.querySelector(".anemo");
+btnAnemo.addEventListener("click", () => {
+  body.classList.add("anemo-bg");
 });
+let btnPyro = document.querySelector(".pyro");
+btnPyro.addEventListener("click", () => {
+  body.classList.add("pyro-bg");
+});
+let btnAll = document.querySelector(".all");
+btnAll.addEventListener("click", () => {
+  body.classList.add("all-bg");
+});
+let btnElectro = document.querySelector(".electro");
+btnElectro.addEventListener("click", () => {
+  body.classList.add("electro-bg");
+});
+let btnHydro = document.querySelector(".hydro");
+btnHydro.addEventListener("click", () => {
+  body.classList.add("hydro-bg");
+});
+let btnGeo = document.querySelector(".geo");
+btnGeo.addEventListener("click", () => {
+  body.classList.add("geo-bg");
+});
+let btnCryo = document.querySelector(".cryo");
+btnCryo.addEventListener("click", () => {
+  body.classList.add("cryo-bg");
+});
+let btnDendro = document.querySelector(".dendro");
+btnDendro.addEventListener("click", () => {
+  body.classList.add("dendro-bg");
+})

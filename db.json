@@ -7,8 +7,8 @@
       "image": "https://i.ibb.co/8r5q3sN/A04-BAA51-78-C6-400-F-90-D2-4-FBEB0208-EBD.jpg",
       "birthday": "24 июля",
       "category": "анемо",
-      "region": "Инадзума ",
-      "weapon": "Катализатор",
+      "region": "inadzuma",
+      "weapon": "катализатор",
       "id": 5
     },
     {
@@ -18,8 +18,8 @@
       "image": "https://i.ibb.co/4jLBH1r/7071-B1-A6-53-C1-47-DD-BB0-F-495052-AA2704.jpg",
       "birthday": "26 июня ",
       "category": "электро",
-      "region": "Инадзума",
-      "weapon": "Одноручное ",
+      "region": "inadzuma",
+      "weapon": "одноручное",
       "id": 3
     },
     {
@@ -29,8 +29,8 @@
       "image": "https://i.ibb.co/XWPcH0s/576-E8-C9-B-5266-4447-8-F2-E-2-C96635-FC24-C.jpg",
       "birthday": "29 октября",
       "category": "анемо",
-      "region": "Инадзума",
-      "weapon": "Одноручное ",
+      "region": "inadzuma",
+      "weapon": "одноручное",
       "id": 4
     },
     {
@@ -40,8 +40,8 @@
       "image": "https://i.ibb.co/hY9Yp0M/C987-EE34-73-C0-4-E4-C-826-F-F8-A48-A47-C951.jpg",
       "birthday": "27 июня",
       "category": "электро",
-      "region": "Inadzuma",
-      "weapon": "Катализатор",
+      "region": "inadzuma",
+      "weapon": "катализатор",
       "id": 6
     },
     {
@@ -51,8 +51,8 @@
       "image": "https://i.ibb.co/VSkn5sc/36-F18343-71-EC-48-F0-B21-F-0513608-E4-DA8.jpg",
       "birthday": "20 ноября",
       "category": "электро",
-      "region": "Li Yue",
-      "weapon": "Одноручное ",
+      "region": "liyue",
+      "weapon": "одноручное",
       "id": 7
     },
     {
@@ -62,8 +62,8 @@
       "image": "https://i.ibb.co/47Xrh6J/DB4-AD536-2154-4-CC2-8-A81-0-A3-BE95-EBC1-F.jpg",
       "birthday": "23 Июня",
       "category": "электро",
-      "region": "Sumeru",
-      "weapon": "Древковое",
+      "region": "sumeru",
+      "weapon": "древковое",
       "id": 8
     },
     {
@@ -73,8 +73,8 @@
       "image": "https://i.ibb.co/68HrdKf/9-FD800-F4-2-A64-4-F9-B-978-F-0-F30-EFD88924.jpg",
       "birthday": "9 сентября ",
       "category": "электро",
-      "region": "Mondtadt",
-      "weapon": "Двуручное",
+      "region": "mondstadt",
+      "weapon": "двуручное",
       "id": 9
     },
     {
@@ -84,8 +84,8 @@
       "image": "https://i.ibb.co/Yj6LfMp/1-BF4-B0-F5-5-E36-431-B-AD43-854-E2-E7-D7-BD3.jpg",
       "birthday": "14 июля",
       "category": "электро",
-      "region": "Inadzuma",
-      "weapon": "Стрелковое",
+      "region": "inadzuma",
+      "weapon": "стрелковое",
       "id": 10
     },
     {
@@ -95,8 +95,8 @@
       "image": "https://i.ibb.co/Mnq2P0N/5-D47-BBED-8-D78-4975-82-CC-D0917-A963-F6-A.jpg",
       "birthday": "20 июля",
       "category": "гидро",
-      "region": "Li Yue",
-      "weapon": "Стрелковое",
+      "region": "liyue",
+      "weapon": "cтрелковое",
       "id": 11
     },
     {
@@ -106,8 +106,8 @@
       "image": "https://i.ibb.co/7jC3Pq7/1-E4217-B4-1-D02-41-D1-829-B-881-A3924-F75-D.jpg",
       "birthday": "30 августа",
       "category": "гидро",
-      "region": "Li Yue",
-      "weapon": "Одноручное ",
+      "region": "liyue",
+      "weapon": "одноручное",
       "id": 12
     },
     {
@@ -117,8 +117,8 @@
       "image": "https://i.ibb.co/JrxxxbK/CD025-F9-E-9-FD2-4614-831-D-FC079-E19393-B.jpg",
       "birthday": "11 ноября",
       "category": "гидро",
-      "region": "Li Yue",
-      "weapon": "Стрелковое",
+      "region": "liyue",
+      "weapon": "стрелковое",
       "id": 13
     },
     {
@@ -128,8 +128,8 @@
       "image": "https://i.ibb.co/VjNRRLd/52-CE80-FB-1920-4292-A335-088-C440-AACA6.jpg",
       "birthday": "25 декабря",
       "category": "гидро",
-      "region": "Inadzuma",
-      "weapon": "Одноручное ",
+      "region": "inadzuma",
+      "weapon": "одноручное",
       "id": 14
     },
     {
@@ -139,8 +139,8 @@
       "image": "https://i.ibb.co/FhtsBfP/11-FFFA73-0407-4618-9116-D02990-CF3-DE5.jpg",
       "birthday": "6 марта",
       "category": "гидро",
-      "region": "Inadzuma",
-      "weapon": "Катализатор",
+      "region": "inadzuma",
+      "weapon": "катализатор",
       "id": 15
     },
     {
@@ -150,8 +150,8 @@
       "image": "https://i.ibb.co/PD75KqT/FC7-B958-A-C554-4143-A939-F1824-A83-D40-D.jpg",
       "birthday": "16 октября",
       "category": "гидро",
-      "region": "Sumeru",
-      "weapon": "Древковое",
+      "region": "sumeru",
+      "weapon": "древковое",
       "id": 16
     },
     {
@@ -161,8 +161,8 @@
       "image": "https://i.ibb.co/FqJLHVP/37-D6-B238-7765-4-E74-AAB3-4049-D328-C396.jpg",
       "birthday": "25 октября",
       "category": "крио",
-      "region": "Mondtadt",
-      "weapon": "Двуручное",
+      "region": "mondstadt",
+      "weapon": "двуручное",
       "id": 17
     },
     {
@@ -172,8 +172,8 @@
       "image": "https://i.ibb.co/TqZj5Tb/420-EAF7-D-6-E76-46-EF-8626-79-B1-F51110-E0.jpg",
       "birthday": "17 апреля",
       "category": "крио",
-      "region": "Sumeru",
-      "weapon": "Одноручное ",
+      "region": "sumeru",
+      "weapon": "одноручное",
       "id": 18
     },
     {
@@ -183,8 +183,8 @@
       "image": "https://i.ibb.co/Fs3W38b/DAFBA7-BC-5-C8-F-4582-A1-D4-2846-B193-D1-F8.jpg",
       "birthday": "13 мая",
       "category": "крио",
-      "region": "Inadzuma",
-      "weapon": "Одноручное ",
+      "region": "inadzuma",
+      "weapon": "одноручное",
       "id": 19
     },
     {
@@ -194,8 +194,8 @@
       "image": "https://i.ibb.co/r486J6C/A2-A95-E33-03-B1-4-B9-B-8749-F6-B7360-EF2-A4.jpg",
       "birthday": "3 октября",
       "category": "крио",
-      "region": "Li Yue",
-      "weapon": "Двуручное",
+      "region": "liyue",
+      "weapon": "двуручное",
       "id": 20
     },
     {
@@ -205,8 +205,8 @@
       "image": "https://i.ibb.co/TKLM3Gn/5-EE83826-C12-B-4-D33-9859-71679-F4-EACFF.jpg",
       "birthday": "5 июля",
       "category": "крио",
-      "region": "Li Yue",
-      "weapon": "Древковое",
+      "region": "liyue",
+      "weapon": "древковое",
       "id": 21
     },
     {
@@ -216,8 +216,8 @@
       "image": "https://i.ibb.co/YQ6FqVw/43-A98-FF6-E8-A7-4388-A24-D-D44916836-A8-F.jpg",
       "birthday": "8 августа",
       "category": "крио",
-      "region": "Li Yue",
-      "weapon": "Стрелковое",
+      "region": "liyue",
+      "weapon": "стрелковое",
       "id": 22
     },
     {
@@ -227,8 +227,8 @@
       "image": "https://i.ibb.co/DR3srr2/9-B98-FE12-4583-495-D-88-F5-B558-DF1-A4803.jpg",
       "birthday": "9 марта",
       "category": "гео",
-      "region": "Li Yue",
-      "weapon": "Древковое",
+      "region": "liyue",
+      "weapon": "древковое",
       "id": 23
     },
     {
@@ -238,8 +238,8 @@
       "image": "https://i.ibb.co/88hKPy4/65-E45456-74-D8-4624-8-F99-29-B9-B25-F0659.jpg",
       "birthday": "20 июля",
       "category": "гео",
-      "region": "Inadzuma",
-      "weapon": "Двуручное",
+      "region": "inadzuma",
+      "weapon": "двуручное",
       "id": 24
     },
     {
@@ -249,8 +249,8 @@
       "image": "https://i.ibb.co/R7Mf4sH/35692-C09-CCA4-4-EA2-A48-A-2-C5-E7-F6-F5730.jpg",
       "birthday": "19 июня ",
       "category": "гео",
-      "region": "Inadzuma",
-      "weapon": "Стрелковое",
+      "region": "inadzuma",
+      "weapon": "стрелковое",
       "id": 25
     },
     {
@@ -260,8 +260,8 @@
       "image": "https://i.ibb.co/y5C5vnq/73-D7-A956-E381-430-F-8-C5-F-29-CCFF167-B45.jpg",
       "birthday": "6 февраля",
       "category": "гео",
-      "region": "Mondtadt",
-      "weapon": "Одноручное ",
+      "region": "mondstadt",
+      "weapon": "одноручное",
       "id": 26
     },
     {
@@ -271,8 +271,8 @@
       "image": "https://i.ibb.co/Y3BZG5k/2-C47-C4-C6-CB58-46-DD-A603-41-BFF61224-EC.jpg",
       "birthday": "16 июня",
       "category": "гео",
-      "region": "Li Yue",
-      "weapon": "Катализатор",
+      "region": "liyue",
+      "weapon": "катализатор",
       "id": 27
     },
     {
@@ -282,8 +282,8 @@
       "image": "https://i.ibb.co/RvGY7zY/ADD31-D86-8-C80-4-A2-C-BCC9-6-A2091-A6-B6-E4.jpg",
       "birthday": "21 марта",
       "category": "гео",
-      "region": "Mondtadt",
-      "weapon": "Двуручное",
+      "region": "mondstadt",
+      "weapon": "двуручное",
       "id": 28
     },
     {
@@ -293,8 +293,8 @@
       "image": "https://i.ibb.co/XJLP2vC/8-EB97-D78-CD51-49-F9-8-D4-E-F04-AF2-D5523-E.jpg",
       "birthday": "28 октября",
       "category": "пиро",
-      "region": "Mondtadt",
-      "weapon": "Двуручное",
+      "region": "mondstadt",
+      "weapon": "двуручное",
       "id": 29
     },
     {
@@ -304,8 +304,8 @@
       "image": "https://i.ibb.co/RDYSPJX/FBBAAE87-AE29-4-F16-98-AF-78-F37-B1156-E2.jpg",
       "birthday": "16 июня",
       "category": "пиро",
-      "region": "Mondtadt",
-      "weapon": "Катализатор",
+      "region": "mondstadt",
+      "weapon": "катализатор",
       "id": 30
     },
     {
@@ -315,8 +315,8 @@
       "image": "https://i.ibb.co/cJXtDRT/3-AAC0549-05-BC-4-A26-AB6-E-95039-F11617-E.jpg",
       "birthday": "24 июля",
       "category": "пиро",
-      "region": "Li Yue",
-      "weapon": "Древковое",
+      "region": "liyue",
+      "weapon": "древковое",
       "id": 31
     },
     {
@@ -326,8 +326,8 @@
       "image": "https://i.ibb.co/XW2rXgM/50-C34-AD0-7-C62-459-A-B4-A2-A3-D2397-C95-B9.jpg",
       "birthday": "27 июня ",
       "category": "пиро",
-      "region": "Li Yue",
-      "weapon": "Катализатор",
+      "region": "liyue",
+      "weapon": "катализатор",
       "id": 32
     },
     {
@@ -337,8 +337,8 @@
       "image": "https://i.ibb.co/Hh5qVCb/8952-C211-DC68-4687-BA51-49-BB8-CF69-ED1.jpg",
       "birthday": "29 октября",
       "category": "пиро",
-      "region": "Inadzuma",
-      "weapon": "Древковое",
+      "region": "inadzuma",
+      "weapon": "древковое",
       "id": 33
     },
     {
@@ -348,8 +348,8 @@
       "image": "https://i.ibb.co/1vRwRDw/83-A7-DE3-D-8864-44-C4-82-FB-551560949395.jpg",
       "birthday": "16 октября",
       "category": "пиро",
-      "region": "Sumeru",
-      "weapon": "Двуручное",
+      "region": "sumeru",
+      "weapon": "двуручное",
       "id": 34
     },
     {
@@ -359,8 +359,8 @@
       "image": "https://i.ibb.co/SPxL2Gw/A6-D4-F34-D-0-CA8-4-D4-F-AAE4-1130-A23130-B8.jpg",
       "birthday": "27 июня ",
       "category": "дендро",
-      "region": "Sumeru",
-      "weapon": "Стрелковое",
+      "region": "sumeru",
+      "weapon": "стрелковое",
       "id": 35
     },
     {
@@ -370,8 +370,8 @@
       "image": "https://i.ibb.co/M5gRGrM/BC881736-5-ECC-47-C7-9285-8-CD306173-EDB.jpg",
       "birthday": "6 сентября",
       "category": "дендро",
-      "region": "Sumeru",
-      "weapon": "Стрелковое",
+      "region": "sumeru",
+      "weapon": "стрелковое",
       "id": 36
     },
     {
@@ -381,8 +381,8 @@
       "image": "https://i.ibb.co/Nr6H4Gz/7117-F4-F2-B7-BE-4-AAC-ACC8-0364450-C1-E99.jpg",
       "birthday": "2 мая",
       "category": "дендро",
-      "region": "Sumeru",
-      "weapon": "Катализатор",
+      "region": "sumeru",
+      "weapon": "катализатор",
       "id": 37
     },
     {
@@ -392,8 +392,8 @@
       "image": "https://i.ibb.co/vv49sqV/469-D5372-97-DC-46-A4-8-C5-B-DC67558-E2-F35.jpg",
       "birthday": "16 июня",
       "category": "дендро",
-      "region": "Sumeru",
-      "weapon": "Одноручное ",
+      "region": "sumeru",
+      "weapon": "одноручное",
       "id": 38
     },
     {
@@ -403,8 +403,8 @@
       "image": "https://i.ibb.co/hLTL1TY/AEA05-D89-3404-4349-B960-20148-E38-D501.jpg",
       "birthday": "9 июня ",
       "category": "дендро",
-      "region": "Sumeru",
-      "weapon": "Двуручное",
+      "region": "sumeru",
+      "weapon": "двуручное",
       "id": 39
     },
     {
@@ -414,8 +414,8 @@
       "image": "https://i.ibb.co/hLTL1TY/AEA05-D89-3404-4349-B960-20148-E38-D501.jpg",
       "birthday": "6 марта",
       "category": "дендро",
-      "region": "Li Yue",
-      "weapon": "Катализатор",
+      "region": "liyue",
+      "weapon": "катализатор",
       "id": 40
     },
     {
@@ -425,8 +425,8 @@
       "image": "https://i.ibb.co/Cb6jGfY/F26-B9729-E8-E2-402-D-A960-7-F6285292-B9-E.jpg",
       "birthday": "29 октября",
       "category": "анемо",
-      "region": "Fontaine",
-      "weapon": "Одноручное ",
+      "region": "fontaine",
+      "weapon": "одноручное",
       "id": 41
     },
     {
@@ -436,8 +436,8 @@
       "image": "https://i.ibb.co/C8QTzxH/1754-C0-D0-4-F55-4-E7-F-952-E-2-E33787-C69-BC.jpg",
       "birthday": "16 октября",
       "category": "крио",
-      "region": "Fontaine",
-      "weapon": "Двуручное",
+      "region": "fontaine",
+      "weapon": "двуручное",
       "id": 42
     },
     {
@@ -447,8 +447,8 @@
       "image": "https://i.ibb.co/KD7MG6x/BD677-C5-B-CF3-B-4-DAB-8-C5-D-D9-EEABA1-E4-B4.jpg",
       "birthday": "6 марта",
       "category": "гидро",
-      "region": "Fontaine",
-      "weapon": "Катализатор",
+      "region": "fontaine",
+      "weapon": "катализатор",
       "id": 43
     },
     {
@@ -458,8 +458,8 @@
       "image": "https://i.ibb.co/WWCc7qH/7-E18-F3-A2-3-F53-4-E90-9-A63-A4939-B013-C8-B.jpg",
       "birthday": "27 июня ",
       "category": "крио",
-      "region": "Fontaine",
-      "weapon": "Катализатор",
+      "region": "fontaine",
+      "weapon": "катализатор",
       "id": 44
     }
   ],
