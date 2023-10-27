@@ -139,7 +139,7 @@ async function render() {
          </button>`
          : ""
       }
-        <button class="btn mt-2 btn-outline-primary btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button class="btn mt-2 btnDesc" id="${card.id}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           Description
         </button>
         <button class="btn mt-2 btn-light btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
@@ -273,7 +273,7 @@ nextPage.addEventListener('click', () => {
 // !Register logic start
 
 const modalReg = document.querySelector("#modalRegister");
-const modalBg = document.querySelector(".modalka-bg");
+const modalBg = document.querySelectorAll(".modalka-bg");
 const registerBtn = document.querySelector("#registerUser-modal");
 const userInp = document.querySelector("#username");
 const ageInp = document.querySelector("#age");
@@ -285,8 +285,23 @@ const isAdminInp = document.querySelector("#isAdmin");
 
 const USER_API = "http://localhost:8000/users";
 
+// logic Modal
+
+modalBg.forEach((item) => {
+  item.addEventListener("click", () => {
+    item.style.display = "none";
+  });
+});
+
+const modal = document.querySelectorAll(".modalka");
+modal.forEach((item) =>
+  item.addEventListener("click", (e) => {
+    e.stopPropagation();
+  })
+);
+
 registerBtn.addEventListener("click", () => {
-  modalReg.style.display = "block";
+  modalReg.style.display = "flex";
 });
 
 async function checkUniqueUser(username) {
@@ -383,7 +398,7 @@ const loginSub = document.querySelector("#loginSubmit");
 const logoutBtn = document.querySelector("#logoutUser-btn");
 
 loginBtn.addEventListener("click", () => {
-  modalLog.style.display = "block";
+  modalLog.style.display = "flex";
 });
 
 function checkLoginLogoutStatus() {
@@ -465,4 +480,17 @@ logoutBtn.addEventListener("click", () => {
   checkLoginLogoutStatus();
   checkUserAccess()
   render();
+});
+
+// description
+
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btnDesc")) {
+    const cardId = e.target.id;
+    console.log(cardId);
+
+    await fetch(`${CHARACTERS_API}/${cardId}`, {
+    });
+    render();
+  }
 });
