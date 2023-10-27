@@ -1,4 +1,4 @@
-const CHARACTERS_API = "http://localhost:8000/characters";
+const CHARACTERS_API = "http://localhost:8001/characters";
 
 let inpName = document.getElementById("character-name");
 let inpPrice = document.getElementById("character-price");
@@ -11,6 +11,14 @@ let inpCategory = document.getElementById("character-category");
 const adminPanel = document.querySelector("#admin-panel-card");
 
 let addForm = document.querySelector("#add-form");
+
+//!cart
+let cartModalBtn = document.querySelector('#cartModal-btn');
+let closeCartBtn = document.querySelector('.btn-close-cart');
+let cartTable = document.querySelector('table');
+let createCartOrderBtn = document.querySelector('#create-cart-order-btn');
+let cleanCartBtn = document.querySelector('#clean-cart-btn')
+let cartTotalCost = document.querySelector('#cart-total-cost');
 
 // !поиск
 let search = "";
@@ -105,9 +113,9 @@ addForm.addEventListener("submit", addProduct);
 //! read
 let sectionCards = document.getElementById("cards");
 async function render(d) {
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`
   }
 
   let response = await fetch(requestAPI);
@@ -146,7 +154,8 @@ async function render(d) {
         }" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Description
         </button>
-        <button class="btn mt-2 btn-light btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button 
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
           Add to cart
         </button>
         </div>
@@ -238,6 +247,53 @@ searchInp.addEventListener("input", () => {
   render();
 });
 
+
+//! voice search
+if ("webkitSpeechRecognition" in window) {
+  const startButton = document.getElementById("startButton");
+  const recognition = new webkitSpeechRecognition();
+
+  recognition.continuous = false;
+  recognition.lang = "ru-RU";
+  recognition.interimResults = true;
+
+  startButton.addEventListener("click", function () {
+    recognition.start();
+    startButton.disabled = true;
+    startButton.textContent = "Слушаем...";
+  });
+
+  recognition.onstart = function () {
+    console.log("Распознавание запущено");
+  };
+
+  recognition.onresult = function(event) {
+    const result = event.results[0][0].transcript;
+    console.log('Результат: ', result);
+    search  = result
+   
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.textContent = 'Начать поиск голосом';
+    render()
+  };
+
+
+  recognition.onerror = function (event) {
+    console.log("Ошибка распознавания: ", event.error);
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.textContent = "Начать поиск голосом";
+  };
+
+  recognition.onend = function () {
+    console.log("Распознавание завершено");
+  };
+} else {
+  alert("Web Speech API не поддерживается в этом браузере.");
+}
+
+
 //!pagination
 async function getPagesCount() {
   let res = await fetch(CHARACTERS_API);
@@ -278,7 +334,7 @@ nextPage.addEventListener("click", () => {
 // !Register logic start
 
 const modalReg = document.querySelector("#modalRegister");
-const modalBg = document.querySelector(".modalka-bg");
+const modalBg = document.querySelectorAll(".modalka-bg");
 const registerBtn = document.querySelector("#registerUser-modal");
 const userInp = document.querySelector("#username");
 const ageInp = document.querySelector("#age");
@@ -288,10 +344,25 @@ const addUserBtn = document.querySelector("#regBtn");
 const registerForm = document.querySelector("#registerForm");
 const isAdminInp = document.querySelector("#isAdmin");
 
-const USER_API = "http://localhost:8000/users";
+const USER_API = "http://localhost:8001/users";
+
+// logic Modal
+
+modalBg.forEach((item) => {
+  item.addEventListener("click", () => {
+    item.style.display = "none";
+  });
+});
+
+const modal = document.querySelectorAll(".modalka");
+modal.forEach((item) =>
+  item.addEventListener("click", (e) => {
+    e.stopPropagation();
+  })
+);
 
 registerBtn.addEventListener("click", () => {
-  modalReg.style.display = "block";
+  modalReg.style.display = "flex";
 });
 
 async function checkUniqueUser(username) {
@@ -381,14 +452,12 @@ const body = document.querySelector("body");
 
 //! Card
 
-const basketBtn = document.querySelector("#basketBtn");
-
 const loginSub = document.querySelector("#loginSubmit");
 //logout
 const logoutBtn = document.querySelector("#logoutUser-btn");
 
 loginBtn.addEventListener("click", () => {
-  modalLog.style.display = "block";
+  modalLog.style.display = "flex";
 });
 
 function checkLoginLogoutStatus() {
@@ -397,12 +466,12 @@ function checkLoginLogoutStatus() {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
     showUsername.innerText = "No user";
-    basketBtn.style.display = "none";
+    cartModalBtn.style.display = "none";
   } else {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
     showUsername.innerText = JSON.parse(user).username;
-    basketBtn.style.display = "block";
+    cartModalBtn.style.display = "block";
   }
 
   showAdminPanel();
@@ -472,8 +541,6 @@ logoutBtn.addEventListener("click", () => {
   render();
 });
 
-<<<<<<< Updated upstream
-=======
 // description
 
 document.addEventListener("click", async (e) => {
@@ -486,8 +553,6 @@ document.addEventListener("click", async (e) => {
     render();
   }})
 
-
->>>>>>> Stashed changes
 //!filtration
 async function addCategoryNomination() {
   let res = await fetch(CHARACTERS_API);
@@ -544,4 +609,5 @@ btnCryo.addEventListener("click", () => {
 let btnDendro = document.querySelector(".dendro");
 btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
-});
+})
+
