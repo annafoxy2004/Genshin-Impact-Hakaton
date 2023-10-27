@@ -1,4 +1,4 @@
-const CHARACTERS_API = "http://localhost:8000/characters";
+const CHARACTERS_API = "http://localhost:8001/characters";
 
 let inpName = document.getElementById("character-name");
 let inpPrice = document.getElementById("character-price");
