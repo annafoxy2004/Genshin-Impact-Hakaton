@@ -474,5 +474,14 @@
       "id": 44
     }
   ],
-  "users": []
+  "users": [
+    {
+      "username": "Anna",
+      "age": "19",
+      "password": "1234567890",
+      "passConf": "1234567890",
+      "isAdmin": true,
+      "id": 1
+    }
+  ]
 }

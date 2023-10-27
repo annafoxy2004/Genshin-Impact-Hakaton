@@ -270,17 +270,199 @@ nextPage.addEventListener('click', () => {
   render();
 });
 
-async function checkPages() {
-  let res = await fetch(CHARACTERS_API);
-  let data = await res.json();
-  let pages = Math.ceil(data.length / 6);
-  if (currentPage === 1) {
-    prevPage.style.display = "none";
-    nextPage.style.display = "block";
-  } else if (currentPage === pages) {
-    nextPage.style.display = "none";
-    prevPage.style.display = "block";
-  }
+// !Register logic start
+
+const modalReg = document.querySelector("#modalRegister");
+const modalBg = document.querySelector(".modalka-bg");
+const registerBtn = document.querySelector("#registerUser-modal");
+const userInp = document.querySelector("#username");
+const ageInp = document.querySelector("#age");
+const passInp = document.querySelector("#pass");
+const passConfInp = document.querySelector("#passConf");
+const addUserBtn = document.querySelector("#regBtn");
+const registerForm = document.querySelector("#registerForm");
+const isAdminInp = document.querySelector("#isAdmin");
+
+const USER_API = "http://localhost:8000/users";
+
+registerBtn.addEventListener("click", () => {
+  modalReg.style.display = "block";
+});
+
+async function checkUniqueUser(username) {
+  let res = await fetch(USER_API);
+  let users = await res.json();
+  return users.some((item) => item.username === username);
 }
 
-checkPages();
+async function registerUserName(e) {
+  e.preventDefault();
+
+  if (
+    !userInp.value.trim() ||
+    !ageInp.value.trim() ||
+    !passInp.value.trim() ||
+    !passConfInp.value.trim()
+  ) {
+    alert("Some input are empty");
+    return;
+  }
+
+  let uniqueUser = await checkUniqueUser(userInp.value);
+  if (uniqueUser) {
+    alert("This username already in use!");
+    return;
+  }
+
+  if (passInp.value.length <= 6) {
+    alert("Min length of password is 6!");
+    return;
+  }
+
+  if (passInp.value !== passConfInp.value) {
+    alert("Passwords don't match");
+    return;
+  }
+
+  if (ageInp.value >= 140) {
+    alert("you old");
+    return;
+  }
+
+  if (ageInp.value <= 14) {
+    alert("you yang");
+    return;
+  }
+
+  let userObj = {
+    username: userInp.value,
+    age: ageInp.value,
+    password: passInp.value,
+    passConf: passConfInp.value,
+    isAdmin: isAdminInp.checked,
+  };
+
+  await fetch(USER_API, {
+    method: "POST",
+    body: JSON.stringify(userObj),
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+
+  modalReg.style.display = "none";
+
+  userInp.value = "";
+  ageInp.value = "";
+  passInp.value = "";
+  passConfInp.value = "";
+  isAdminInp.checked = false;
+
+  alert("Registered successfully!");
+}
+
+registerForm.addEventListener("submit", registerUserName);
+
+// login start
+
+const modalLog = document.querySelector("#modalLogin");
+const loginBtn = document.querySelector("#loginUser-modal");
+const loginUserInp = document.querySelector("#userLogin");
+const loginPassInp = document.querySelector("#passLogin");
+const loginForm = document.querySelector("#loginForm");
+const changeThemeBtn = document.querySelector("#changeTheme");
+const showUsername = document.querySelector("#showUsername");
+const body = document.querySelector("body");
+
+//! Card
+
+const basketBtn = document.querySelector("#basketBtn");
+
+const loginSub = document.querySelector("#loginSubmit");
+//logout
+const logoutBtn = document.querySelector("#logoutUser-btn");
+
+loginBtn.addEventListener("click", () => {
+  modalLog.style.display = "block";
+});
+
+function checkLoginLogoutStatus() {
+  let user = localStorage.getItem("user");
+  if (!user) {
+    loginBtn.style.display = "block";
+    logoutBtn.style.display = "none";
+    showUsername.innerText = "No user";
+    basketBtn.style.display = "none";
+  } else {
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "block";
+    showUsername.innerText = JSON.parse(user).username;
+    basketBtn.style.display = "block";
+  }
+
+  showAdminPanel()
+}
+
+checkLoginLogoutStatus();
+
+function checkUsersInUsers(username, users) {
+  return users.some((item) => item.username === username);
+}
+
+function checkUserPassword(user, password) {
+  return user.password === password;
+}
+
+function setUserToStorage(username, isAdmin) {
+  localStorage.setItem(
+    "user",
+    JSON.stringify({
+      username,
+      isAdmin,
+    })
+  );
+}
+
+async function loginUser() {
+  let res = await fetch(USER_API);
+  let users = await res.json();
+  initStorege();
+
+  if (!loginUserInp.value.trim() || !loginPassInp.value.trim()) {
+    alert("Some inputs are empty");
+    return;
+  }
+
+  if (!checkUsersInUsers(loginUserInp.value, users)) {
+    alert("User not found");
+    return;
+  }
+
+  let userObj = users.find((item) => item.username === loginUserInp.value);
+
+  if (!checkUserPassword(userObj, loginPassInp.value)) {
+    alert("Wrong password");
+  }
+
+  setUserToStorage(userObj.username, userObj.isAdmin);
+
+  loginUserInp.value = "";
+  loginPassInp.value = "";
+
+  checkLoginLogoutStatus();
+  render();
+
+  modalLog.style.display = "none";
+}
+
+loginSub.addEventListener("click", loginUser);
+
+// logout
+
+logoutBtn.addEventListener("click", () => {
+  localStorage.removeItem("user");
+  showAdminPanel();
+  checkLoginLogoutStatus();
+  checkUserAccess()
+  render();
+});
