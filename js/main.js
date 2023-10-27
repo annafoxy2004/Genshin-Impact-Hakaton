@@ -278,7 +278,7 @@ nextPage.addEventListener("click", () => {
 // !Register logic start
 
 const modalReg = document.querySelector("#modalRegister");
-const modalBg = document.querySelector(".modalka-bg");
+const modalBg = document.querySelectorAll(".modalka-bg");
 const registerBtn = document.querySelector("#registerUser-modal");
 const userInp = document.querySelector("#username");
 const ageInp = document.querySelector("#age");
@@ -288,10 +288,25 @@ const addUserBtn = document.querySelector("#regBtn");
 const registerForm = document.querySelector("#registerForm");
 const isAdminInp = document.querySelector("#isAdmin");
 
-const USER_API = "http://localhost:8000/users";
+const USER_API = "http://localhost:8001/users";
+
+// logic Modal
+
+modalBg.forEach((item) => {
+  item.addEventListener("click", () => {
+    item.style.display = "none";
+  });
+});
+
+const modal = document.querySelectorAll(".modalka");
+modal.forEach((item) =>
+  item.addEventListener("click", (e) => {
+    e.stopPropagation();
+  })
+);
 
 registerBtn.addEventListener("click", () => {
-  modalReg.style.display = "block";
+  modalReg.style.display = "flex";
 });
 
 async function checkUniqueUser(username) {
@@ -388,7 +403,7 @@ const loginSub = document.querySelector("#loginSubmit");
 const logoutBtn = document.querySelector("#logoutUser-btn");
 
 loginBtn.addEventListener("click", () => {
-  modalLog.style.display = "block";
+  modalLog.style.display = "flex";
 });
 
 function checkLoginLogoutStatus() {
@@ -472,6 +487,17 @@ logoutBtn.addEventListener("click", () => {
   render();
 });
 
+// description
+
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btnDesc")) {
+    const cardId = e.target.id;
+    console.log(cardId);
+
+    await fetch(`${CHARACTERS_API}/${cardId}`, {
+    });
+    render();
+  }})
 //!filtration
 async function addCategoryNomination() {
   let res = await fetch(CHARACTERS_API);
@@ -528,4 +554,4 @@ btnCryo.addEventListener("click", () => {
 let btnDendro = document.querySelector(".dendro");
 btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
-});
+})

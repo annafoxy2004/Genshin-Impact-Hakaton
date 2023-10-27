@@ -160,9 +160,11 @@
           <input type="number" id="age" placeholder="age" />
           <input type="password" id="pass" placeholder="password" />
           <input type="password" id="passConf" placeholder="password confirm" />
-          <label for="isAdmin">Admin</label>
-          <input id="isAdmin" type="checkbox" />
-          <button type="submit" class="regBtn">Register</button>
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <label for="isAdmin">Admin</label>
+            <input id="isAdmin" type="checkbox" />
+          </div>
+          <button type="submit" id="registerBtn-css" class="regBtn">Register</button>
         </form>
       </div>
     </div>
@@ -178,7 +180,7 @@
           <input type="text" id="userLogin" placeholder="username" />
 
           <input type="password" id="passLogin" placeholder="enter password" />
-          <button id="loginSubmit" type="submit">Login</button>
+          <button class="loginSubmit-button" id="loginSubmit" type="submit">Login</button>
         </form>
       </div>
     </div>
@@ -620,6 +622,27 @@
         </div>
       </footer>
       <!--! Footer -->
+    </div>
+
+    <!-- Modal description -->
+
+    <!-- Scrollable modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script

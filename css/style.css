@@ -1385,22 +1385,26 @@ a {
 
 .modalka-bg {
   display: none;
-  background: #00000078;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://i.ibb.co/D7kt731/preview.gif);
+    background-size: contain;
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   z-index: 10;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px) !important;
 }
 
 .modalka {
-  height: 450px;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: whitesmoke;
   width: 30%;
   gap: 40px;
   border-radius: 8px;
@@ -1408,9 +1412,37 @@ a {
 }
 
 .modalka h2 {
+  font-size: 400%;
   font-family: sans-serif;
-  color: #3d30a2;
+  color: #6a5acd;
   font-weight: 550;
+  margin-bottom: 2%;
+}
+
+.loginSubmit-button {
+  background-color: #6a5acd;
+  border-color: #6a5acd;
+}
+
+.loginSubmit-button:hover {
+  background-color: transparent;
+  color: #6a5acd;
+}
+
+#registerBtn-css{
+  background-color: #6a5acd;
+  border-color: #6a5acd;
+}
+
+#registerBtn-css:hover {
+  background-color: transparent;
+  color: #6a5acd;
+}
+
+.modalka input {
+  margin-top: 5%;
+  width: 100%;
+  height: 40%;
 }
 
 #registerForm {
@@ -1418,20 +1450,47 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+}
+
+#registerForm input{
+  height: 3rem;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+#isAdmin{
+  height: 1rem !important;
+  /* width: 100%; */
+  margin-bottom: 5%;
 }
 
 #loginForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 5%;
+  border-radius: 10%;
+}
+
+#loginForm input {
+  height: 3rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+#loginForm button {
+  margin-top: 1rem;
 }
 
 /* cart */
 #cartModalBtn {
   display: none;
+} 
+
+.modal-body{
+  width: 1000px;
 }
+
 
 :focus {
   outline: 0;
