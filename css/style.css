@@ -1487,11 +1487,6 @@ a {
   display: none;
 } 
 
-.modal-body{
-  width: 1000px;
-}
-
-
 :focus {
   outline: 0;
   border-color: #2260ff;
@@ -1573,4 +1568,8 @@ label:last-child span {
 
 .all-bg{
   background: radial-gradient(rgb(83, 19, 147), rgb(9, 7, 23));
+}
+
+.btn-purple{
+  background-color: #9688eb;
 }

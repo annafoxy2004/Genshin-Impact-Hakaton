@@ -97,7 +97,7 @@
                   class="nav-link active"
                   aria-current="page"
                   href="#"
-                  id="basketBtn"
+                   id="cartModal-btn" data-bs-toggle="modal" data-bs-target="#cartModal"
                   ><img src="./images/basket.svg" alt="basket"></a
                 >
               </li>
@@ -293,32 +293,6 @@
        
       </div>
       <!-- !filtration end -->
-
-      <!-- ?filter starts -->
-    <!-- <div class="radio-inputs mt-5 mb-5 mx-auto">
-      <label class="radio">
-        <input id="" type="radio" name="radio" checked="" />
-        <span class="name">All</span>
-      </label>
-      <label class="radio">
-        <input id="cars" type="radio" name="radio" />
-        <span class="name">cars</span>
-      </label>
-
-      <label class="radio">
-        <input id="tanks" type="radio" name="radio" />
-        <span class="name">tanks</span>
-      </label>
-      <label class="radio">
-        <input id="guns" type="radio" name="radio" />
-        <span class="name">guns</span>
-      </label>
-      <label class="radio">
-        <input id="grenade" type="radio" name="radio" />
-        <span class="name">grenade</span>
-      </label>
-    </div> -->
-    <!-- ?filter ends -->
 
       <!--! cards start -->
       <section class="mt-5 container-xll">
@@ -539,6 +513,28 @@
       </div>
       <!-- !slider end -->
 
+<!-- !modal for cart start-->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cart</h1>
+        <button type="button" class="btn-close btn-close-cart" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body w-100">
+        <table class="border border-dark w-100 text-center">
+        </table>
+        <h4 class="my-3" id="cart-total-cost"></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-purple" id="create-cart-order-btn">Order</button>
+        <button type="button" class="btn btn-purple" id="clean-cart-btn">Clean cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- !modal for cart end-->
+
       <!-- !Footer -->
       <footer class="page-footer font-small cyan darken-3">
         <!-- Footer Elements -->
@@ -644,6 +640,8 @@
         </div>
       </div>
     </div>
+
+
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
