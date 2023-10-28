@@ -607,6 +607,7 @@ document.addEventListener("click", async (e) => {
     modalDeckBg.style.display = "flex";
   }
   const descId = e.target.id;
+  console.log(descId)
   let response = await fetch(`${CHARACTERS_API}/${descId}`);
   let deskObj = await response.json();
 
@@ -617,7 +618,7 @@ document.addEventListener("click", async (e) => {
               </div>
               <div class="modal-desc-coments" style="width: 65%; height: 100%;">
                 <div class="desck-info" style="color: aliceblue;">
-                  <button type="button" class="btn-close btnDeskClose" id="buttonDeskClose" aria-label="Close"></button>
+                  <button class="btnDeskClose" id="buttonDeskClose">X</button>
                   <h2>${deskObj.name}</h2>
                   <p>${deskObj.price}</p>
                   <p>${deskObj.desc}</p>
@@ -632,7 +633,6 @@ document.addEventListener("click", async (e) => {
                     <p>User</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
                   </div>
-  
                   <div style="color: aliceblue;">
                     <p>User</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
@@ -664,9 +664,7 @@ document.addEventListener("click", async (e) => {
 });
 
 const deskCloseBtn = document.querySelector("#buttonDeskClose");
-// deskCloseBtn.addEventListener("click", ()=>{
 
-// })
 document.addEventListener("click", (e) =>{
   if(e.target.classList.contains("btnDeskClose")){
     modalDeckBg.style.display = "none"
