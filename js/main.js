@@ -13,12 +13,12 @@ const adminPanel = document.querySelector("#admin-panel-card");
 let addForm = document.querySelector("#add-form");
 
 //!cart
-let cartModalBtn = document.querySelector("#cartModal-btn");
-let closeCartBtn = document.querySelector(".btn-close-cart");
-let cartTable = document.querySelector("table");
-let createCartOrderBtn = document.querySelector("#create-cart-order-btn");
-let cleanCartBtn = document.querySelector("#clean-cart-btn");
-let cartTotalCost = document.querySelector("#cart-total-cost");
+let cartModalBtn = document.querySelector('#cartModal-btn');
+let closeCartBtn = document.querySelector('.btn-close-cart');
+let cartTable = document.querySelector('table');
+let createCartOrderBtn = document.querySelector('#create-cart-order-btn');
+let cleanCartBtn = document.querySelector('#clean-cart-btn')
+let cartTotalCost = document.querySelector('#cart-total-cost');
 
 // !поиск
 let search = "";
@@ -112,9 +112,9 @@ addForm.addEventListener("submit", addProduct);
 //! read
 let sectionCards = document.getElementById("cards");
 async function render(d) {
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`
   }
 
   let response = await fetch(requestAPI);
@@ -152,9 +152,7 @@ async function render(d) {
           Description
         </button>
         <button 
-        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${
-          card.id
-        }">
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
           Add to cart
         </button>
         </div>
@@ -265,16 +263,17 @@ if ("webkitSpeechRecognition" in window) {
     console.log("Распознавание запущено");
   };
 
-  recognition.onresult = function (event) {
+  recognition.onresult = function(event) {
     const result = event.results[0][0].transcript;
-    console.log("Результат: ", result);
-    search = result;
-
+    console.log('Результат: ', result);
+    search  = result
+   
     recognition.stop();
     startButton.disabled = false;
-    startButton.textContent = "Начать поиск голосом";
-    render();
+    startButton.textContent = 'Начать поиск голосом';
+    render()
   };
+
 
   recognition.onerror = function (event) {
     console.log("Ошибка распознавания: ", event.error);
@@ -448,8 +447,6 @@ const body = document.querySelector("body");
 
 //! Card
 
-const basketBtn = document.querySelector("#basketBtn");
-
 const loginSub = document.querySelector("#loginSubmit");
 //logout
 const logoutBtn = document.querySelector("#logoutUser-btn");
@@ -464,12 +461,12 @@ function checkLoginLogoutStatus() {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
     showUsername.innerText = "No user";
-    basketBtn.style.display = "none";
+    cartModalBtn.style.display = "none";
   } else {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
     showUsername.innerText = JSON.parse(user).username;
-    basketBtn.style.display = "block";
+    cartModalBtn.style.display = "block";
   }
 
   showAdminPanel();
@@ -670,3 +667,4 @@ document.addEventListener("click", (e) =>{
     modalDeckBg.style.display = "none"
   }
 })
+

@@ -1485,11 +1485,7 @@ a {
 /* cart */
 #cartModalBtn {
   display: none;
-}
-
-.modal-body {
-  width: 1000px;
-}
+} 
 
 :focus {
   outline: 0;
