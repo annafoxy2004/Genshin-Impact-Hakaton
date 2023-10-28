@@ -12,13 +12,15 @@ const adminPanel = document.querySelector("#admin-panel-card");
 
 let addForm = document.querySelector("#add-form");
 
+let favorites = document.querySelector("#favorites");
+
 //!cart
-let cartModalBtn = document.querySelector('#cartModal-btn');
-let closeCartBtn = document.querySelector('.btn-close-cart');
-let cartTable = document.querySelector('table');
-let createCartOrderBtn = document.querySelector('#create-cart-order-btn');
-let cleanCartBtn = document.querySelector('#clean-cart-btn')
-let cartTotalCost = document.querySelector('#cart-total-cost');
+let cartModalBtn = document.querySelector("#cartModal-btn");
+let closeCartBtn = document.querySelector(".btn-close-cart");
+let cartTable = document.querySelector(".cartTable");
+let createCartOrderBtn = document.querySelector("#create-cart-order-btn");
+let cleanCartBtn = document.querySelector("#clean-cart-btn");
+let cartTotalCost = document.querySelector("#cart-total-cost");
 
 // !поиск
 let search = "";
@@ -32,7 +34,6 @@ let currentPage = 1;
 
 //!filtration
 let category = "";
-
 
 //? CRUD characters
 
@@ -113,9 +114,9 @@ addForm.addEventListener("submit", addProduct);
 //! read
 let sectionCards = document.getElementById("cards");
 async function render(d) {
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
   }
 
   let response = await fetch(requestAPI);
@@ -123,7 +124,7 @@ async function render(d) {
   sectionCards.innerHTML = "";
   data.forEach((card) => {
     sectionCards.innerHTML += `
-    <div class="cardd m-5">
+    <div class="cardd m-5 generalCard">
     <div class="content d-flex flex-column">
       <div class="content d-flex align-items-start m-2">
         <img src="${card.image}" class="detailsCard imageCard" alt="${
@@ -155,7 +156,9 @@ async function render(d) {
           Description
         </button>
         <button 
-        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${
+          card.id
+        }">
           Add to cart
         </button>
         </div>
@@ -247,7 +250,6 @@ searchInp.addEventListener("input", () => {
   render();
 });
 
-
 //! voice search
 if ("webkitSpeechRecognition" in window) {
   const startButton = document.getElementById("startButton");
@@ -267,17 +269,16 @@ if ("webkitSpeechRecognition" in window) {
     console.log("Распознавание запущено");
   };
 
-  recognition.onresult = function(event) {
+  recognition.onresult = function (event) {
     const result = event.results[0][0].transcript;
-    console.log('Результат: ', result);
-    search  = result
-   
+    console.log("Результат: ", result);
+    search = result;
+
     recognition.stop();
     startButton.disabled = false;
-    startButton.textContent = 'Начать поиск голосом';
-    render()
+    startButton.textContent = "Начать поиск голосом";
+    render();
   };
-
 
   recognition.onerror = function (event) {
     console.log("Ошибка распознавания: ", event.error);
@@ -292,7 +293,6 @@ if ("webkitSpeechRecognition" in window) {
 } else {
   alert("Web Speech API не поддерживается в этом браузере.");
 }
-
 
 //!pagination
 async function getPagesCount() {
@@ -467,11 +467,13 @@ function checkLoginLogoutStatus() {
     logoutBtn.style.display = "none";
     showUsername.innerText = "No user";
     cartModalBtn.style.display = "none";
+    favorites.style.display = "none";
   } else {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
     showUsername.innerText = JSON.parse(user).username;
     cartModalBtn.style.display = "block";
+    favorites.style.display = "block";
   }
 
   showAdminPanel();
@@ -541,17 +543,6 @@ logoutBtn.addEventListener("click", () => {
   render();
 });
 
-// description
-
-document.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("btnDesc")) {
-    const cardId = e.target.id;
-    console.log(cardId);
-
-    await fetch(`${CHARACTERS_API}/${cardId}`, {
-    });
-    render();
-  }})
 //!filtration
 async function addCategoryNomination() {
   let res = await fetch(CHARACTERS_API);
@@ -608,5 +599,241 @@ btnCryo.addEventListener("click", () => {
 let btnDendro = document.querySelector(".dendro");
 btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
-})
+});
 
+// !cart logic
+async function getProductObjectId(e) {
+  try {
+    let productId = e.target.dataset.productId; // Получаем ID продукта из атрибута данных data-product-id
+
+    let response = await fetch(`${CHARACTERS_API}/${productId}`);
+
+    if (response.ok) {
+      let productData = await response.json();
+      // Здесь вы можете делать что-то с полученными данными, например, выводить их в консоль или обновлять интерфейс.
+      console.log(productData);
+    } else {
+      console.error('Ошибка при загрузке данных с сервера');
+    }
+  } catch (error) {
+    console.error('Произошла ошибка при отправке запроса:', error);
+  }
+}
+
+function addCartOpenEvent() {
+  let addCartProductBtns = document.querySelectorAll(".btn-cart");
+  addCartProductBtns.forEach((btn) => {
+    btn.addEventListener("click", getProductObjectId);
+  });
+}
+
+
+// async function getProductObjectId(e) {
+// document.addEventListener("click", async (e) => {
+//   console.log("wertgyhuj");
+//   if (e.target.classList.contains("generalCard")) {
+//     let charactersId = e.target.id;
+//     let res = await fetch(`${CHARACTERS_API}/${charactersId}`);
+//     let productObj = await res.json();
+//     console.log(productObj);
+//   }
+// });
+
+// }
+// getProductObjectId()
+
+// // Функция, которая получает объект продукта по его ID
+// async function getProductObjectById(productId) {
+//   let res = await fetch(`${CHARACTERS_API}/${productId}`);
+//   let productObj = await res.json();
+//   return productObj;
+// }
+
+// // Функция для подсчета общей стоимости продуктов в корзине
+// function countCartTotalCost(products) {
+//   let cartTotalCost = products.reduce((acc, currentItem) => {
+//     return acc + currentItem.totalCost;
+//   }, 0);
+//   return cartTotalCost;
+// }
+
+// //!
+// function initStorage() {
+//   if (!localStorage.getItem("cart")) {
+//     localStorage.setItem("cart", "[]");
+//   }
+// }
+// initStorage();
+// //!
+
+// // Функция для добавления нового продукта в корзину
+// function addNewProductToCart(productCartObj) {
+//   let cartObj = JSON.parse(localStorage.getItem("cart"));
+//   cartObj.products.push(productCartObj);
+//   cartObj.totalCost = countCartTotalCost(cartObj.products);
+
+//   localStorage.setItem("cart", JSON.stringify(cartObj));
+// }
+
+// // Функция для создания объекта корзины и сохранения его в localStorage
+// function addCartObjToLocalStorage() {
+//   // Получаем информацию о владельце корзины из localStorage (пользователе)
+//   let cartOwner = JSON.parse(localStorage.getItem("user"));
+
+//   let cartObj = {
+//     id: Date.now(),
+//     owner: cartOwner.username,
+//     totalCost: 0,
+//     products: [],
+//   };
+
+//   localStorage.setItem("cart", JSON.stringify(cartObj));
+// }
+
+// // Функция для добавления продукта в корзину
+// async function addProductToCart(e) {
+//   // Получаем ID продукта, на который кликнули
+//   let productId = e.target.id.split("-")[1];
+//   // Получаем информацию о продукте с сервера
+//   let productObj = await getProductObjectById(productId);
+//   // Запрашиваем у пользователя количество продукта в корзине
+//   let cartProductCount = +prompt("Enter product count for cart");
+//   // Создаем объект для добавления в корзину
+//   let productCartObj = {
+//     count: cartProductCount, // Количество продукта в корзине
+//     totalCost: +productObj.price * cartProductCount, // Общая стоимость продукта
+//     productItem: productObj, // Сам продукт
+//   };
+//   // Получаем текущее состояние корзины из localStorage
+//   let cartObj = JSON.parse(localStorage.getItem("cart"));
+//   // Если корзина уже существует, добавляем в неё новый продукт
+//   if (cartObj) {
+//     addNewProductToCart(productCartObj);
+//   } else {
+//     // Если корзины ещё нет, создаем новую корзину и добавляем в неё продукт
+//     addCartObjToLocalStorage();
+//     addNewProductToCart(productCartObj);
+//   }
+// }
+
+// // Функция для добавления события "click" на кнопки корзины
+// function addCartEvent() {
+//   let cartBtns = document.querySelectorAll(".btn-cart");
+//   cartBtns.forEach((btn) => btn.addEventListener("click", addProductToCart));
+// }
+
+// // Функция для отображения содержимого корзины
+// function cartRender() {
+//   let cartObj = JSON.parse(localStorage.getItem("cart"));
+//   if (!cartObj == []) {
+//     // Если корзины нет, выводим сообщение об отсутствии продуктов
+//     cartTable.innerHTML = "<h3>No products in cart!</h3>";
+//     cartTotalCost.innerText = "Total cost: 0$";
+//     return;
+//   }
+
+//   cartTable.innerHTML = `
+//         <tr>
+//             <th class="border border-dark">Image</th>
+//             <th class="border border-dark">Title</th>
+//             <th class="border border-dark">Count</th>
+//             <th class="border border-dark">Price</th>
+//             <th class="border border-dark">Total</th>
+//             <th class="border border-dark">Delete</th>
+//         </tr>
+//     `;
+//   cartObj.products.forEach((cartProduct) => {
+//     // Для каждого продукта в корзине отображаем его информацию
+//     cartTable.innerHTML += `
+//         <tr>
+//             <td class="border border-dark">
+//             <img src=${cartProduct.productItem.image} alt="error:(" width="50" height="50">
+//             </td>
+//             <td class="border border-dark">${cartProduct.productItem.name}</td>
+//             <td class="border border-dark">${cartProduct.count}</td>
+//             <td class="border border-dark">${cartProduct.productItem.price}</td>
+//             <td class="border border-dark">${cartProduct.totalCost}</td>
+//             <td class="border border-dark">
+//             <button class="btn btn-danger del-cart-btn" id="cart-product-${cartProduct.productItem.id}">DELETE</button>
+//             </td>
+//         </tr>
+//         `;
+//   });
+//   cartTotalCost.innerText = `Total cost: ${cartObj.totalCost}$`;
+//   // Добавляем событие "click" на кнопки удаления продуктов из корзины
+//   addDeleteEventForCartProduct();
+// }
+
+// // Обработчик клика по кнопке "Show Cart"
+// cartModalBtn.addEventListener("click", cartRender);
+
+// // Функция для удаления продукта из корзины
+// function deleteProductFromCart(e) {
+//   let productId = e.target.id.split("-");
+//   productId = productId[productId.length - 1];
+//   // Получаем текущее состояние корзины из localStorage
+//   let cartObj = JSON.parse(localStorage.getItem("cart"));
+//   // Фильтруем список продуктов в корзине, оставляя только те, которые не удаляем
+//   cartObj.products = cartObj.products.filter(
+//     (cartProduct) => cartProduct.productItem.id != productId
+//   );
+//   // Пересчитываем общую стоимость корзины
+//   cartObj.totalCost = countCartTotalCost(cartObj.products);
+//   if (cartObj.products.length === 0) {
+//     // Если больше нет продуктов в корзине, удаляем корзину из localStorage
+//     localStorage.removeItem("cart");
+//   } else {
+//     // Иначе сохраняем обновленное состояние корзины в localStorage
+//     localStorage.setItem("cart", JSON.stringify(cartObj));
+//   }
+//   // Повторно отображаем содержимое корзины
+//   cartRender();
+// }
+
+// // Функция для добавления события "click" на кнопки удаления продуктов из корзины
+// function addDeleteEventForCartProduct() {
+//   let delCartProductBtns = document.querySelectorAll(".del-cart-btn");
+//   delCartProductBtns.forEach((btn) =>
+//     btn.addEventListener("click", deleteProductFromCart)
+//   );
+// }
+
+// // API endpoint для создания заказов
+// const ORDERS_API = "http://localhost:8001/orders";
+
+// // Функция для отправки заказа на сервер
+// async function sendOrder(cartObj) {
+//   // Отправляем POST-запрос на сервер с информацией о заказе
+//   await fetch(ORDERS_API, {
+//     method: "POST",
+//     body: JSON.stringify(cartObj),
+//     headers: {
+//       "Content-Type": "application/json;charset=utf-8",
+//     },
+//   });
+// }
+
+// // Функция для создания заказа
+// async function createOrder() {
+//   // Получаем текущее состояние корзины из localStorage
+//   let cartObj = JSON.parse(localStorage.getItem("cart"));
+//   if (!cartObj) {
+//     alert("No products in cart!");
+//     return;
+//   }
+//   // Отправляем заказ на сервер и очищаем корзину
+//   await sendOrder(cartObj);
+//   localStorage.removeItem("cart");
+//   cartRender();
+// }
+
+// // Обработчик клика по кнопке "Create Order"
+// createCartOrderBtn.addEventListener("click", createOrder);
+
+// // Обработчик клика по кнопке "Clean Cart"
+// cleanCartBtn.addEventListener("click", () => {
+//   // Удаляем корзину из localStorage и обновляем отображение корзины
+//   localStorage.removeItem("cart");
+//   cartRender();
+// });
+// cartRender()
