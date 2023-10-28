@@ -12,6 +12,14 @@ const adminPanel = document.querySelector("#admin-panel-card");
 
 let addForm = document.querySelector("#add-form");
 
+//!cart
+let cartModalBtn = document.querySelector("#cartModal-btn");
+let closeCartBtn = document.querySelector(".btn-close-cart");
+let cartTable = document.querySelector("table");
+let createCartOrderBtn = document.querySelector("#create-cart-order-btn");
+let cleanCartBtn = document.querySelector("#clean-cart-btn");
+let cartTotalCost = document.querySelector("#cart-total-cost");
+
 // !поиск
 let search = "";
 const searchInp = document.querySelector("#search-inp");
@@ -24,7 +32,6 @@ let currentPage = 1;
 
 //!filtration
 let category = "";
-
 
 //? CRUD characters
 
@@ -141,12 +148,13 @@ async function render(d) {
          </button>`
           : ""
       }
-        <button class="btn mt-2 btn-light btnDesc" id="${
-          card.id
-        }" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button class="btn mt-2 btn-light btnDesc" id="${card.id}">
           Description
         </button>
-        <button class="btn mt-2 btn-light btn-add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        <button 
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${
+          card.id
+        }">
           Add to cart
         </button>
         </div>
@@ -237,6 +245,50 @@ searchInp.addEventListener("input", () => {
   currentPage = 1;
   render();
 });
+
+//! voice search
+if ("webkitSpeechRecognition" in window) {
+  const startButton = document.getElementById("startButton");
+  const recognition = new webkitSpeechRecognition();
+
+  recognition.continuous = false;
+  recognition.lang = "ru-RU";
+  recognition.interimResults = true;
+
+  startButton.addEventListener("click", function () {
+    recognition.start();
+    startButton.disabled = true;
+    startButton.textContent = "Слушаем...";
+  });
+
+  recognition.onstart = function () {
+    console.log("Распознавание запущено");
+  };
+
+  recognition.onresult = function (event) {
+    const result = event.results[0][0].transcript;
+    console.log("Результат: ", result);
+    search = result;
+
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.textContent = "Начать поиск голосом";
+    render();
+  };
+
+  recognition.onerror = function (event) {
+    console.log("Ошибка распознавания: ", event.error);
+    recognition.stop();
+    startButton.disabled = false;
+    startButton.textContent = "Начать поиск голосом";
+  };
+
+  recognition.onend = function () {
+    console.log("Распознавание завершено");
+  };
+} else {
+  alert("Web Speech API не поддерживается в этом браузере.");
+}
 
 //!pagination
 async function getPagesCount() {
@@ -487,17 +539,6 @@ logoutBtn.addEventListener("click", () => {
   render();
 });
 
-// description
-
-document.addEventListener("click", async (e) => {
-  if (e.target.classList.contains("btnDesc")) {
-    const cardId = e.target.id;
-    console.log(cardId);
-
-    await fetch(`${CHARACTERS_API}/${cardId}`, {
-    });
-    render();
-  }})
 //!filtration
 async function addCategoryNomination() {
   let res = await fetch(CHARACTERS_API);
@@ -554,4 +595,80 @@ btnCryo.addEventListener("click", () => {
 let btnDendro = document.querySelector(".dendro");
 btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
+});
+
+// description
+
+const modalDeckBg = document.querySelector("#modal-deck-bg-log");
+const btnDesk = document.querySelector(".btnDesc");
+
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btnDesc")) {
+    modalDeckBg.style.display = "flex";
+  }
+  const descId = e.target.id;
+  let response = await fetch(`${CHARACTERS_API}/${descId}`);
+  let deskObj = await response.json();
+
+  modalDeckBg.innerHTML = `
+      <div class="modal-descrip-body">
+              <div class="modal-desc-img" style="width: 35%; height: 100%; background-color: rgb(62, 58, 141);">
+              <img src="${deskObj.image}" alt="${deskObj.image}">
+              </div>
+              <div class="modal-desc-coments" style="width: 65%; height: 100%;">
+                <div class="desck-info" style="color: aliceblue;">
+                  <button type="button" class="btn-close btnDeskClose" id="buttonDeskClose" aria-label="Close"></button>
+                  <h2>${deskObj.name}</h2>
+                  <p>${deskObj.price}</p>
+                  <p>${deskObj.desc}</p>
+                  <p>${deskObj.weapon}</p>
+                  <p>${deskObj.region}</p>
+                  <p>${deskObj.category}</p>
+                </div>
+                <img id="line" src="https://t3.ftcdn.net/jpg/03/95/48/86/360_F_395488683_CfxpbZa3he1ygTZXHdSpHUvZyqL4sv2v.jpg" alt="">
+                <h2 style="font-size: 200%; color: whitesmoke; margin-top: 5%;">COMMENTS</h2>
+                <div class="modal-dialog" style="width: 100%; height: auto">
+                  <div style="color: aliceblue;">
+                    <p>User</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                  </div>
+  
+                  <div style="color: aliceblue;">
+                    <p>User</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                  </div>
+                  <div style="color: aliceblue;">
+                    <p>User</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                  </div>
+                  <div style="color: aliceblue;">
+                    <p>User</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                  </div>
+                  <div style="color: aliceblue;">
+                    <p>User</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                  </div>
+                </div>
+                <img id="line" src="https://t3.ftcdn.net/jpg/03/95/48/86/360_F_395488683_CfxpbZa3he1ygTZXHdSpHUvZyqL4sv2v.jpg" alt="">
+                <div class="desk-like-favorite" style="width: 100%; height: 12%;">
+                </div>
+                <div class="deck-iput-comments" style="width: 100%; height: 9%;">
+                <input style="width: 60%; height: 60%;" type="text" placeholder="Add comments...">
+                <button>publish</button>
+                </div>
+  
+              </div>
+            </div>
+      `;
+});
+
+const deskCloseBtn = document.querySelector("#buttonDeskClose");
+// deskCloseBtn.addEventListener("click", ()=>{
+
+// })
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("btnDeskClose")){
+    modalDeckBg.style.display = "none"
+  }
 })
