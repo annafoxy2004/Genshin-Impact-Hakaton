@@ -14,11 +14,6 @@ let addForm = document.querySelector("#add-form");
 
 //!cart
 let cartModalBtn = document.querySelector("#cartModal-btn");
-// let closeCartBtn = document.querySelector('.btn-close-cart');
-// let cartTable = document.querySelector('table');
-// let createCartOrderBtn = document.querySelector('#create-cart-order-btn');
-// let cleanCartBtn = document.querySelector('#clean-cart-btn')
-// let cartTotalCost = document.querySelector('#cart-total-cost');
 
 // !поиск
 let search = "";
