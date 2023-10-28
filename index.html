@@ -24,6 +24,63 @@
     />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
+
+        <!--! Modal description castom start -->
+
+        <div class="modal-descrip-bg" id="modal-deck-bg-log">
+          <!-- <div class="modal-descrip-body">
+            <div class="modal-desc-img" style="width: 35%; height: 100%; background-color: rgb(62, 58, 141);">
+            <img src="https://i.ibb.co/WWCc7qH/7-E18-F3-A2-3-F53-4-E90-9-A63-A4939-B013-C8-B.jpg" alt="">
+            </div>
+            <div class="modal-desc-coments" style="width: 65%; height: 100%;">
+              <div class="desck-info" style="color: aliceblue;">
+                <button>close</button>
+                <h2>NAME</h2>
+                <p>1500</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam nulla numquam quis est magnam! Eveniet quibusdam cumque modi eius. Quo in voluptas esse, assumenda magnam similique nostrum aspernatur nesciunt dolore?</p>
+                <p>kjnsd;kfjng</p>
+                <p>09djfhg</p>
+                <p>kjndfkjgnskj</p>
+              </div>
+              <img id="line" src="https://t3.ftcdn.net/jpg/03/95/48/86/360_F_395488683_CfxpbZa3he1ygTZXHdSpHUvZyqL4sv2v.jpg" alt="">
+              <h2 style="font-size: 200%; color: whitesmoke; margin-top: 5%;">COMMENTS</h2>
+              <div class="modal-dialog" style="width: 100%; height: auto">
+                <div style="color: aliceblue;">
+                  <p>User</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                </div>
+
+                <div style="color: aliceblue;">
+                  <p>User</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                </div>
+                <div style="color: aliceblue;">
+                  <p>User</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                </div>
+                <div style="color: aliceblue;">
+                  <p>User</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                </div>
+                <div style="color: aliceblue;">
+                  <p>User</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
+                </div>
+              </div>
+              <img id="line" src="https://t3.ftcdn.net/jpg/03/95/48/86/360_F_395488683_CfxpbZa3he1ygTZXHdSpHUvZyqL4sv2v.jpg" alt="">
+              <div class="desk-like-favorite" style="width: 100%; height: 12%;">
+              </div>
+              <div class="deck-iput-comments" style="width: 100%; height: 9%;">
+              <input style="width: 60%; height: 60%;" type="text" placeholder="Add comments...">
+              <button>publish</button>
+              </div>
+
+            </div>
+          </div> -->
+        </div>
+  
+        <!--! Modal description castom end -->
+
   <body style="background-color: black">
     <!-- background with stars -->
     <div class="bg-animation position-relative">
@@ -97,7 +154,7 @@
                   class="nav-link active"
                   aria-current="page"
                   href="#"
-                   id="cartModal-btn" data-bs-toggle="modal" data-bs-target="#cartModal"
+                  id="cartModal-btn"
                   ><img src="./images/basket.svg" alt="basket"></a
                 >
               </li>
@@ -417,39 +474,6 @@
       </div>
       <!-- !edit modal end -->
 
-      <!-- !modal description start -->
-      <div class="modal modal-desc" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--! modal description end -->
-
       <!-- !slider start -->
       <div
         id="carouselExampleIndicators"
@@ -510,27 +534,27 @@
       </div>
       <!-- !slider end -->
 
-<!-- !modal for cart start-->
-<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <!--! modal for cart start-->
+ <!-- <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Cart</h1>
         <button type="button" class="btn-close btn-close-cart" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body w-100">
+      <div class="modal-body">
         <table class="border border-dark w-100 text-center">
         </table>
         <h4 class="my-3" id="cart-total-cost"></h4>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-purple" id="create-cart-order-btn">Order</button>
-        <button type="button" class="btn btn-purple" id="clean-cart-btn">Clean cart</button>
+        <button type="button" class="btn btn-secondary" id="create-cart-order-btn">ORDER</button>
+        <button type="button" class="btn btn-danger" id="clean-cart-btn">CLEAN ALL</button>
       </div>
     </div>
   </div>
-</div>
-<!-- !modal for cart end-->
+</div> -->
+ <!--! modal for cart end-->
 
       <!-- !Footer -->
       <footer class="page-footer font-small cyan darken-3">
@@ -637,8 +661,6 @@
         </div>
       </div>
     </div>
-
-
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
