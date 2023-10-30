@@ -1410,7 +1410,7 @@ a {
   width: 30%;
   gap: 40px;
   border-radius: 8px;
-  border: 2px solid ;
+  border: 2px solid;
   margin: 30px auto;
   color: #fff;
 }
@@ -1418,30 +1418,29 @@ a {
 .modalka h2 {
   font-size: 400%;
   font-family: sans-serif;
-  color:#50178a;
+  color: #50178a;
   font-weight: 550;
   margin-bottom: 2%;
 }
 
 .loginSubmit-button {
-  background-color:#50178a;
-  border-color:#50178a;
+  background-color: #50178a;
+  border-color: #50178a;
 }
 
 .loginSubmit-button:hover {
   background-color: transparent;
-  color:#50178a;
+  color: #50178a;
 }
 
-
 #registerBtn-css {
-  background-color:#50178a;
-  border-color:#50178a;
+  background-color: #50178a;
+  border-color: #50178a;
 }
 
 #registerBtn-css:hover {
   background-color: transparent;
-  color:#50178a;
+  color: #50178a;
 }
 
 .modalka input {
@@ -2244,7 +2243,7 @@ label:last-child span {
 marquee {
   height: 20em;
 }
-marquee img{
+marquee img {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -2269,10 +2268,10 @@ marquee img:hover {
   background-color: #fff;
   box-shadow: 0 0.4em 0.3em rgba(255, 255, 255, 0.5);
   border: 10px solid transparent;
-background-color: #08142f;
+  background-color: #08142f;
 }
 
-#news{
+#news {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -2282,48 +2281,57 @@ background-color: #08142f;
   /* width: 40%; */
 }
 
-.imageNews img{
+.imageNews img {
   width: 100%;
   object-fit: cover;
   height: 30em;
 }
 
-.card-text{
+.card-text {
   color: whitesmoke;
 }
 
-.card-title{
+.card-title {
   color: whitesmoke;
 }
 /* comments start */
 
-.container-modal-btn{
+.container-modal-btn {
   width: 100%;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
 
-.form-comment-modal{
+.form-comment-modal {
   position: fixed;
   bottom: 4%;
   background-color: black;
   color: #fff;
 }
 
-.addComment{
+.addComment {
   color: #fff;
 }
 
 /* адаптивка */
 
-@media all and (max-width: 1371px){
-  #admin-panel-card{
-    height: 110%;
+@media all and (max-width: 1420px) {
+  #admin-panel-card {
+    height: 45rem;
   }
-  .cardd{
+  .modalka {
+    height: 100%;
+  }
+  #admin-panel-news {
+    height: 35rem;
+  }
+}
+
+@media all and (max-width: 1371px) {
+  .cardd {
     width: 41.5%;
   }
-  .modalka{
+  .modalka {
     height: 80%;
   }
   .modal-descrip-body {
@@ -2331,15 +2339,14 @@ background-color: #08142f;
   }
 }
 
-@media all and (max-width: 1340px){
+@media all and (max-width: 1340px) {
   .filter-container {
     margin-left: 3rem;
   }
-
 }
 
-@media all and (max-width: 1279px){
-  .cardd{
+@media all and (max-width: 1279px) {
+  .cardd {
     width: 41%;
     height: 95%;
   }
@@ -2348,19 +2355,19 @@ background-color: #08142f;
   }
 }
 
-@media all and (max-width: 1275px){
+@media all and (max-width: 1275px) {
   .filter-container {
     margin-left: 2rem;
   }
 }
 
-@media all and (max-width: 1260px){
+@media all and (max-width: 1260px) {
   .filter-container {
     margin-left: 1rem;
   }
 }
 
-@media all and (max-width: 1241px){
+@media all and (max-width: 1241px) {
   .filter-container {
     margin-left: 0rem;
   }
@@ -2369,43 +2376,99 @@ background-color: #08142f;
   }
 }
 
-@media all and (max-width: 1228px){
+@media all and (max-width: 1228px) {
   .one-btn-filter {
     font-size: 17.5px;
   }
 }
 
-@media all and (max-width: 1201px){
+@media all and (max-width: 1201px) {
   .one-btn-filter {
     font-size: 17px;
   }
 }
 
-@media all and (max-width: 1199px){
+@media all and (max-width: 1199px) {
   .one-btn-filter {
     font-size: 17px;
   }
-  .cardd{
+  .cardd {
     width: 40.5%;
     height: 90%;
   }
 }
 
-@media all and (max-width: 1173px){
+@media all and (max-width: 1173px) {
   .one-btn-filter {
     font-size: 102%;
   }
 }
 
-@media all and (max-width: 1137px){
+@media all and (max-width: 1137px) {
   .one-btn-filter {
     font-size: 100%;
   }
 }
 
-@media all and (max-width: 1131px){
+@media all and (max-width: 1131px) {
   .filter-container {
     justify-content: center;
     align-items: center;
+    margin-left: 10%;
+  }
+
+  .cardd {
+    width: 39%;
+    height: 85%;
+  }
+
+  .one-btn-filter {
+    font-size: 90%;
+  }
+}
+
+@media all and (max-width: 1036px) {
+  .one-btn-filter {
+    font-size: 130%;
+    margin-right: 2%;
+    margin-top: 2%;
+  }
+}
+
+@media all and (max-width: 960px) {
+  .one-btn-filter {
+    font-size: 130%;
+    margin-right: 2%;
+    margin-top: 2%;
+  }
+
+  #cards {
+    width: 100%;
+    margin-left: 15%;
+  }
+
+  .cardd {
+    width: 60%;
+    height: 75%;
+  }
+}
+
+@media all and (max-width: 662px) {
+  #cards {
+    margin-left: 11%;
+  }
+
+  .cardd {
+    width: 70%;
+    height: 60%;
+  }
+
+  .navbar{
+  width: 100% !important;
+
+}
+
+  .navbar-toggler {
+    margin-right: 50px;
   }
 }
