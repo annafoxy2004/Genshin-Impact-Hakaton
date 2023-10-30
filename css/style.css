@@ -1580,7 +1580,7 @@ label:last-child span {
 /* modal desc */
 
 .modal-descrip-bg {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   width: 100%;

@@ -472,6 +472,14 @@
       "passConf": "1234567890",
       "isAdmin": false,
       "id": 4
+    },
+    {
+      "username": "ol",
+      "age": "78",
+      "password": "1234567",
+      "passConf": "1234567",
+      "isAdmin": false,
+      "id": 5
     }
   ],
   "orders": [
@@ -660,6 +668,22 @@
       "owner": "Anna",
       "totalCost": 0,
       "products": []
+    },
+    {
+      "id": 1698658717793,
+      "totalCost": 2000,
+      "products": [
+        {
+          "count": 5,
+          "totalCost": 2000,
+          "productItem": {
+            "name": "Е Лань",
+            "price": "400",
+            "image": "https://i.ibb.co/JrxxxbK/CD025-F9-E-9-FD2-4614-831-D-FC079-E19393-B.jpg",
+            "id": 13
+          }
+        }
+      ]
     }
   ],
   "news": [

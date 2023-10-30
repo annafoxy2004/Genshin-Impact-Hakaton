@@ -556,8 +556,6 @@ logoutBtn.addEventListener("click", () => {
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("btnDesc")) {
     const cardId = e.target.id;
-    console.log(cardId);
-
     await fetch(`${CHARACTERS_API}/${cardId}`, {
     });
     render();
