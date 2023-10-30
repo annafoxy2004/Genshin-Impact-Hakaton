@@ -1183,7 +1183,7 @@ video {
 }
 
 .imageCard {
-  height: 60vh;
+  height: 500px;
   border-radius: 2%;
   margin-right: 6%;
 }
@@ -1588,7 +1588,7 @@ label:last-child span {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 6;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 .modal-descrip-body {
   display: flex;
@@ -1603,7 +1603,7 @@ label:last-child span {
   object-fit: cover;
   background-color: rgb(62, 58, 141);
 }
-.modal-desc-img{
+.modal-desc-img {
   background-color: rgb(62, 58, 141);
   margin-right: 2%;
 }
@@ -1615,16 +1615,16 @@ label:last-child span {
   margin-right: 2%;
 }
 
-#line{
+#line {
   width: 100%;
   height: 0.3%;
 }
 
-.description-nav p{
+.description-nav p {
   font-size: 150%;
   margin-bottom: 0px;
 }
-.description-nav{
+.description-nav {
   /* position: absolute; */
   background-color: black;
   bottom: 10px;
@@ -1633,7 +1633,18 @@ label:last-child span {
   height: 5%;
   color: whitesmoke;
 }
-.btn-purple{
+#buttonDeskClose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 90%;
+  height: 5%;
+  background-color: transparent;
+  border: 0px solid #fff;
+  color: #fff;
+  font-size: 20px;
+}
+.btn-purple {
   background-color: #9688eb;
 }
 
@@ -2283,5 +2294,118 @@ background-color: #08142f;
 
 .card-title{
   color: whitesmoke;
-  
+}
+/* comments start */
+
+.container-modal-btn{
+  width: 100%;
+  display: flex;
+  flex-direction:column;
+}
+
+.form-comment-modal{
+  position: fixed;
+  bottom: 4%;
+  background-color: black;
+  color: #fff;
+}
+
+.addComment{
+  color: #fff;
+}
+
+/* адаптивка */
+
+@media all and (max-width: 1371px){
+  #admin-panel-card{
+    height: 110%;
+  }
+  .cardd{
+    width: 41.5%;
+  }
+  .modalka{
+    height: 80%;
+  }
+  .modal-descrip-body {
+    width: 55%;
+  }
+}
+
+@media all and (max-width: 1340px){
+  .filter-container {
+    margin-left: 3rem;
+  }
+
+}
+
+@media all and (max-width: 1279px){
+  .cardd{
+    width: 41%;
+    height: 95%;
+  }
+  .imageCard {
+    height: 450px;
+  }
+}
+
+@media all and (max-width: 1275px){
+  .filter-container {
+    margin-left: 2rem;
+  }
+}
+
+@media all and (max-width: 1260px){
+  .filter-container {
+    margin-left: 1rem;
+  }
+}
+
+@media all and (max-width: 1241px){
+  .filter-container {
+    margin-left: 0rem;
+  }
+  #buttonDeskClose {
+    margin-left: 85%;
+  }
+}
+
+@media all and (max-width: 1228px){
+  .one-btn-filter {
+    font-size: 17.5px;
+  }
+}
+
+@media all and (max-width: 1201px){
+  .one-btn-filter {
+    font-size: 17px;
+  }
+}
+
+@media all and (max-width: 1199px){
+  .one-btn-filter {
+    font-size: 17px;
+  }
+  .cardd{
+    width: 40.5%;
+    height: 90%;
+  }
+}
+
+@media all and (max-width: 1173px){
+  .one-btn-filter {
+    font-size: 102%;
+  }
+}
+
+@media all and (max-width: 1137px){
+  .one-btn-filter {
+    font-size: 100%;
+  }
+}
+
+@media all and (max-width: 1131px){
+  .filter-container {
+    justify-content: center;
+    align-items: center;
+  }
 }
