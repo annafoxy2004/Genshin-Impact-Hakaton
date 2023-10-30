@@ -461,6 +461,28 @@
       "region": "fontaine",
       "weapon": "катализатор",
       "id": 44
+    },
+    {
+      "name": "opkoij",
+      "price": "45678",
+      "desc": "bjhbjhb",
+      "image": "https://static.wikia.nocookie.net/genshin-impact/images/2/2d/%D0%9F%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%B6_%D0%9A%D0%B0%D0%B4%D0%B7%D1%83%D1%85%D0%B0_%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B0.jpg/revision/latest?cb=20210607112101&path-prefix=ru",
+      "birthday": "9888",
+      "category": "гидро",
+      "region": "liyue",
+      "weapon": "kjbjhbjh",
+      "id": 45
+    },
+    {
+      "name": "Rfjsgkmkjndcv",
+      "price": "92830",
+      "desc": "osigjibosj;fgkos",
+      "image": "https://static.wikia.nocookie.net/genshin-impact/images/2/2d/%D0%9F%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%B6_%D0%9A%D0%B0%D0%B4%D0%B7%D1%83%D1%85%D0%B0_%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%87%D0%BA%D0%B0.jpg/revision/latest?cb=20210607112101&path-prefix=ru",
+      "birthday": "2345",
+      "category": "электро",
+      "region": "liyue",
+      "weapon": "234rwerg",
+      "id": 46
     }
   ],
   "users": [
@@ -486,7 +508,58 @@
       "passConf": "1234567890",
       "isAdmin": true,
       "id": 3
+    },
+    {
+      "username": "Olesia",
+      "age": "17",
+      "password": "1234567",
+      "passConf": "1234567",
+      "isAdmin": true,
+      "id": 4
+    },
+    {
+      "username": "Olesia098",
+      "age": "19",
+      "password": "111111111",
+      "passConf": "111111111",
+      "isAdmin": false,
+      "id": 5
+    },
+    {
+      "username": "Sofia",
+      "age": "16",
+      "password": "Sofia123",
+      "passConf": "Sofia123",
+      "isAdmin": false,
+      "id": 6
     }
   ],
-  "orders": []
+  "orders": [],
+  "comments": [
+    {
+      "user": "Olesia",
+      "comment": "This person better!",
+      "id": 1
+    },
+    {
+      "user": "Olesia",
+      "comment": "yguyjghhgvj",
+      "id": 2
+    },
+    {
+      "user": "Olesia",
+      "comment": "jgvjhgvjhbvk",
+      "id": 3
+    },
+    {
+      "user": "Anna",
+      "comment": "jgbjybgjhv hjbg;ou",
+      "id": 4
+    },
+    {
+      "user": "Olesia",
+      "comment": "kjhbkhbvjhvhjv",
+      "id": 5
+    }
+  ]
 }

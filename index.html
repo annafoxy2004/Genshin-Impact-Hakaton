@@ -25,6 +25,26 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
 
+    <!-- ! modal comments start-->
+
+    <div style="z-index: 20;" class="modal-descrip-bg" id="modal-comments-bg">
+      <div style="width: 30%;" class="modal-descrip-body">
+        <div class="container-modal-btn">
+          <button class="btnCommentClose" id="buttonDeskClose">X</button>
+          <div class="addComment" id="userComentContainer">
+            <h3>Name</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam excepturi explicabo sapiente, neque assumenda tempore exercitationem doloribus quidem saepe! Qui et dicta velit eius ipsa, ex sunt ducimus accusamus est.</p>
+          </div>
+          <form style="width: 30%;" class="form-comment-modal" id="form-comment-modal-id">
+          <input id="inputComment" style="width: 70%; height: 100%;" type="text" name="text" class="input" placeholder="Write a message">
+          <button>send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal comments end -->
+
         <!--! Modal description castom start -->
 
         <div class="modal-descrip-bg" id="modal-deck-bg-log">
@@ -154,7 +174,7 @@
                   class="nav-link active"
                   aria-current="page"
                   href="#"
-                  id="basketBtn"
+                  id="cartModal-btn" data-bs-toggle="modal" data-bs-target="#cartModal"
                   ><img src="./images/basket.svg" alt="basket"></a
                 >
               </li>
@@ -163,9 +183,7 @@
                   class="nav-link active"
                   aria-current="page"
                   href="#"
-                  id="cartModal-btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#cartModal"
+                  data-bs-toggle="modal" data-bs-target="#favoritesModal" id="favoritesModal-btn"
                   ><img src="./images/favoritesIcon.svg" alt="favorites" style="fill: white;"></a
                 >
               </li>

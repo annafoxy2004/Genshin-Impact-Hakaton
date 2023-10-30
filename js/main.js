@@ -13,7 +13,8 @@ const adminPanel = document.querySelector("#admin-panel-card");
 let addForm = document.querySelector("#add-form");
 
 //!cart
-let cartModalBtn = document.querySelector('#cartModal-btn');
+let loveModalBtn = document.querySelector('#favoritesModal-btn');
+let basketBtn = document.querySelector("#cartModal-btn")
 let closeCartBtn = document.querySelector('.btn-close-cart');
 let cartTable = document.querySelector('table');
 let createCartOrderBtn = document.querySelector('#create-cart-order-btn');
@@ -47,7 +48,7 @@ initStorege();
 
 function checkUserAccess() {
   let user = JSON.parse(localStorage.getItem("user"));
-  if (user) return user.isAdmin;
+  if (user) return(user.isAdmin);
   return false;
 }
 
@@ -112,9 +113,9 @@ addForm.addEventListener("submit", addProduct);
 //! read
 let sectionCards = document.getElementById("cards");
 async function render(d) {
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
   }
 
   let response = await fetch(requestAPI);
@@ -122,7 +123,7 @@ async function render(d) {
   sectionCards.innerHTML = "";
   data.forEach((card) => {
     sectionCards.innerHTML += `
-    <div class="cardd m-5">
+    <div class="cardd m-5 generalCard">
     <div class="content d-flex flex-column">
       <div class="content d-flex align-items-start m-2">
         <img src="${card.image}" class="detailsCard imageCard" alt="${
@@ -148,12 +149,22 @@ async function render(d) {
          </button>`
           : ""
       }
-        <button class="btn mt-2 btn-light btnDesc" id="${card.id}">
+        <button class="btn mt-2 btn-light btnDesc" id="${
+          card.id
+        }" data-bs-toggle="modal" data-bs-target="#exampleModal2">
           Description
         </button>
         <button 
-        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${
+          card.id
+        }">
           Add to cart
+        </button>
+        <button 
+        class="btn mt-2 btn-dark btn-add-to-cart btn-favorites" id="cart-${
+          card.id
+        }" style="border-radius:14px; width:55px;">
+        <img src="./images/favoritesIcon.svg" alt="favorites">
         </button>
         </div>
     </div>
@@ -461,12 +472,14 @@ function checkLoginLogoutStatus() {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
     showUsername.innerText = "No user";
-    cartModalBtn.style.display = "none";
+    loveModalBtn.style.display = "none";
+    basketBtn.style.display = "none"
   } else {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
     showUsername.innerText = JSON.parse(user).username;
-    cartModalBtn.style.display = "block";
+    loveModalBtn.style.display = "block";
+    basketBtn.style.display = "block"
   }
 
   showAdminPanel();
@@ -594,6 +607,76 @@ btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
 });
 
+// Отзывы
+
+const COMMENT_API = "http://localhost:8001/comments"
+
+const modalCommentsBg = document.querySelector("#modal-comments-bg")
+const inpCommen = document.querySelector("#inputComment")
+const formComment = document.querySelector("#form-comment-modal-id")
+let userComentCont = document.querySelector("#userComentContainer")
+
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("commentsBtn")){
+    modalCommentsBg.style.display = "flex";
+  }
+})
+
+async function addComment(e) {
+  e.preventDefault();
+  if(!inpCommen.value.trim()){
+    alert("You can't send emptu messege")
+    return;
+  }
+
+  let user = localStorage.getItem("user");
+  const showName = showUsername.innerText = JSON.parse(user).username
+  
+  let objCommen = {
+    user: showName,
+    comment: inpCommen.value,
+  }
+
+  await fetch(`${COMMENT_API}`, {
+    method: "POST",
+    body: JSON.stringify(objCommen),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  });
+
+  inpCommen.value = ""
+  renderComment()
+}
+formComment.addEventListener("submit", addComment);
+
+async function renderComment() {
+  let responseCom = await fetch(COMMENT_API);
+  let dataCom = await responseCom.json();
+  userComentCont.innerHTML = "";
+  dataCom.forEach((commen) => {
+    userComentCont.innerHTML += `
+    <h3 style="font-size: 120%;">${commen.user}</h3>
+    <p>${commen.comment}</p>
+    `
+  })
+}
+renderComment()
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("btnCommentClose")){
+    modalCommentsBg.style.display = "none"
+  }
+})
+
+const deskCloseBtn = document.querySelector("#buttonDeskClose");
+
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("btnDeskClose")){
+    modalDeckBg.style.display = "none"
+  }
+})
+
+
 // description
 
 const modalDeckBg = document.querySelector("#modal-deck-bg-log");
@@ -602,7 +685,7 @@ const btnDesk = document.querySelector(".btnDesc");
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("btnDesc")) {
     modalDeckBg.style.display = "flex";
-  }
+
   const descId = e.target.id;
   console.log(descId)
   let response = await fetch(`${CHARACTERS_API}/${descId}`);
@@ -617,54 +700,17 @@ document.addEventListener("click", async (e) => {
                 <div class="desck-info" style="color: aliceblue;">
                   <button class="btnDeskClose" id="buttonDeskClose">X</button>
                   <h2>${deskObj.name}</h2>
-                  <p>${deskObj.price}</p>
                   <p>${deskObj.desc}</p>
-                  <p>${deskObj.weapon}</p>
-                  <p>${deskObj.region}</p>
-                  <p>${deskObj.category}</p>
+                  <p>Элемент: ${deskObj.category}</p>
+                  <p>Оружие: ${deskObj.weapon}</p>
+                  <p>Регион: ${deskObj.region}</p>
+                  <p>Цена: ${deskObj.price}$</p>
                 </div>
-                <img id="line" src="https://t3.ftcdn.net/jpg/03/95/48/86/360_F_395488683_CfxpbZa3he1ygTZXHdSpHUvZyqL4sv2v.jpg" alt="">
-                <h2 style="font-size: 200%; color: whitesmoke; margin-top: 5%;">COMMENTS</h2>
-                <div class="modal-dialog" style="width: 100%; height: auto">
-                  <div style="color: aliceblue;">
-                    <p>User</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
-                  </div>
-                  <div style="color: aliceblue;">
-                    <p>User</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
-                  </div>
-                  <div style="color: aliceblue;">
-                    <p>User</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
-                  </div>
-                  <div style="color: aliceblue;">
-                    <p>User</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
-                  </div>
-                  <div style="color: aliceblue;">
-                    <p>User</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quod rerum soluta in adipisci repellendus voluptate maiores odit vel id, excepturi incidunt ratione facere temporibus, qui est. Expedita, molestiae sint.</p>
-                  </div>
-                </div>
-                <img id="line" src="https://t3.ftcdn.net/jpg/03/95/48/86/360_F_395488683_CfxpbZa3he1ygTZXHdSpHUvZyqL4sv2v.jpg" alt="">
-                <div class="desk-like-favorite" style="width: 100%; height: 12%;">
-                </div>
-                <div class="deck-iput-comments" style="width: 100%; height: 9%;">
-                <input style="width: 60%; height: 60%;" type="text" placeholder="Add comments...">
-                <button>publish</button>
-                </div>
+                <button class="commentsBtn">Отзывы</button>
   
               </div>
             </div>
       `;
-});
-
-const deskCloseBtn = document.querySelector("#buttonDeskClose");
-
-document.addEventListener("click", (e) =>{
-  if(e.target.classList.contains("btnDeskClose")){
-    modalDeckBg.style.display = "none"
   }
-})
+});
 

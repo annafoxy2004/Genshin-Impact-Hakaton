@@ -1183,7 +1183,7 @@ video {
 }
 
 .imageCard {
-  height: 60vh;
+  height: 500px;
   border-radius: 2%;
   margin-right: 6%;
 }
@@ -1581,7 +1581,7 @@ label:last-child span {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 6;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 .modal-descrip-body {
   display: flex;
@@ -1639,4 +1639,119 @@ label:last-child span {
 }
 .btn-purple {
   background-color: #9688eb;
+}
+
+/* comments start */
+
+.container-modal-btn{
+  width: 100%;
+  display: flex;
+  flex-direction:column;
+}
+
+.form-comment-modal{
+  position: fixed;
+  bottom: 4%;
+  background-color: black;
+  color: #fff;
+}
+
+.addComment{
+  color: #fff;
+}
+
+/* адаптивка */
+
+@media all and (max-width: 1371px){
+  #admin-panel-card{
+    height: 110%;
+  }
+  .cardd{
+    width: 41.5%;
+  }
+  .modalka{
+    height: 80%;
+  }
+  .modal-descrip-body {
+    width: 55%;
+  }
+}
+
+@media all and (max-width: 1340px){
+  .filter-container {
+    margin-left: 3rem;
+  }
+
+}
+
+@media all and (max-width: 1279px){
+  .cardd{
+    width: 41%;
+    height: 95%;
+  }
+  .imageCard {
+    height: 450px;
+  }
+}
+
+@media all and (max-width: 1275px){
+  .filter-container {
+    margin-left: 2rem;
+  }
+}
+
+@media all and (max-width: 1260px){
+  .filter-container {
+    margin-left: 1rem;
+  }
+}
+
+@media all and (max-width: 1241px){
+  .filter-container {
+    margin-left: 0rem;
+  }
+  #buttonDeskClose {
+    margin-left: 85%;
+  }
+}
+
+@media all and (max-width: 1228px){
+  .one-btn-filter {
+    font-size: 17.5px;
+  }
+}
+
+@media all and (max-width: 1201px){
+  .one-btn-filter {
+    font-size: 17px;
+  }
+}
+
+@media all and (max-width: 1199px){
+  .one-btn-filter {
+    font-size: 17px;
+  }
+  .cardd{
+    width: 40.5%;
+    height: 90%;
+  }
+}
+
+@media all and (max-width: 1173px){
+  .one-btn-filter {
+    font-size: 102%;
+  }
+}
+
+@media all and (max-width: 1137px){
+  .one-btn-filter {
+    font-size: 100%;
+  }
+}
+
+@media all and (max-width: 1131px){
+  .filter-container {
+    justify-content: center;
+    align-items: center;
+  }
 }
