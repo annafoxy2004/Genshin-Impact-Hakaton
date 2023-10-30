@@ -3,6 +3,7 @@
 }
 body {
   background: radial-gradient(rgb(83, 19, 147), rgb(9, 7, 23));
+  margin: auto;
 }
 
 .full-wh {
@@ -1194,13 +1195,14 @@ video {
 
 .main_cont {
   height: 100%;
+  margin-bottom: 0px;
+  /* margin-right: auto;
+margin-left: auto; */
+width: 100vh;
+position: absolute;
+z-index: 5;
+
 }
-/* @media (max-width: "850px") {
-  .main_cont{
-    width: 100%;
-    text-align: center;
-  }
-} */
 
 .imageCard {
   height: 500px;
@@ -2400,6 +2402,12 @@ background-color: #08142f;
   .one-btn-filter {
     font-size: 17px;
   }
+  .textandimg img{
+    width: 100%;
+  }
+#headImgText{
+  font-size: 1.5rem;
+}
 }
 
 @media all and (max-width: 1199px){
@@ -2589,4 +2597,17 @@ background-color: #08142f;
   .navbar-toggler {
     margin-right: 50px;
   }
+
 }
+
+@media all and (max-width: 1000px) {
+.textandimg{
+  top:30%;
+}
+}
+
+/* @media(max-wigth: 660px){
+  .textandimg{
+    top:10%;
+  }
+} */
