@@ -555,6 +555,16 @@ logoutBtn.addEventListener("click", () => {
   render();
 });
 
+// description
+
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btnDesc")) {
+    const cardId = e.target.id;
+    await fetch(`${CHARACTERS_API}/${cardId}`, {
+    });
+    render();
+  }})
+
 //!filtration
 async function addCategoryNomination() {
   let res = await fetch(CHARACTERS_API);

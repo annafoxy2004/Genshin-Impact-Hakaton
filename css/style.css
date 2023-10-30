@@ -1155,6 +1155,20 @@ button:hover .star-6 {
   font-size: 3rem;
   color: white;
 }
+@media (max-width: 1340px) {
+  .textandimg {
+    top: 30%;
+  }
+}
+@media (max-width: 1050px) {
+  .textandimg {
+    top: 50%;
+  } 
+  .video-container {
+    height: 60vh !important;
+  }
+
+}
 
 .nav-head {
   position: relative;
@@ -1181,6 +1195,12 @@ video {
 .main_cont {
   height: 100%;
 }
+/* @media (max-width: "850px") {
+  .main_cont{
+    width: 100%;
+    text-align: center;
+  }
+} */
 
 .imageCard {
   height: 500px;
@@ -1208,6 +1228,14 @@ video {
   display: flex;
   flex-wrap: wrap;
   gap: 2%;
+}
+@media (max-width: 850px){
+  #cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
 }
 
 .cardd {
@@ -2400,5 +2428,165 @@ background-color: #08142f;
   .filter-container {
     justify-content: center;
     align-items: center;
+  }
+}
+
+/* адаптивка */
+
+@media all and (max-width: 1420px) {
+  #admin-panel-card {
+    height: 45rem;
+  }
+  .modalka {
+    height: 100%;
+  }
+  #admin-panel-news {
+    height: 35rem;
+  }
+}
+
+@media all and (max-width: 1371px) {
+  .cardd {
+    width: 41.5%;
+  }
+  .modalka {
+    height: 80%;
+  }
+  .modal-descrip-body {
+    width: 55%;
+  }
+}
+
+@media all and (max-width: 1340px) {
+  .filter-container {
+    margin-left: 3rem;
+  }
+}
+
+@media all and (max-width: 1279px) {
+  .cardd {
+    width: 41%;
+    height: 95%;
+  }
+  .imageCard {
+    height: 450px;
+  }
+}
+
+@media all and (max-width: 1275px) {
+  .filter-container {
+    margin-left: 2rem;
+  }
+}
+
+@media all and (max-width: 1260px) {
+  .filter-container {
+    margin-left: 1rem;
+  }
+}
+
+@media all and (max-width: 1241px) {
+  .filter-container {
+    margin-left: 0rem;
+  }
+  #buttonDeskClose {
+    margin-left: 85%;
+  }
+}
+
+@media all and (max-width: 1228px) {
+  .one-btn-filter {
+    font-size: 17.5px;
+  }
+}
+
+@media all and (max-width: 1201px) {
+  .one-btn-filter {
+    font-size: 17px;
+  }
+}
+
+@media all and (max-width: 1199px) {
+  .one-btn-filter {
+    font-size: 17px;
+  }
+  .cardd {
+    width: 40.5%;
+    height: 90%;
+  }
+}
+
+@media all and (max-width: 1173px) {
+  .one-btn-filter {
+    font-size: 102%;
+  }
+}
+
+@media all and (max-width: 1137px) {
+  .one-btn-filter {
+    font-size: 100%;
+  }
+}
+
+@media all and (max-width: 1131px) {
+  .filter-container {
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+  }
+
+  .cardd {
+    width: 39%;
+    height: 85%;
+  }
+
+  .one-btn-filter {
+    font-size: 90%;
+  }
+}
+
+@media all and (max-width: 1036px) {
+  .one-btn-filter {
+    font-size: 130%;
+    margin-right: 2%;
+    margin-top: 2%;
+  }
+}
+
+@media all and (max-width: 960px) {
+  .one-btn-filter {
+    font-size: 130%;
+    margin-right: 2%;
+    margin-top: 2%;
+  }
+
+  #cards {
+    width: 100%;
+    margin-left: 15%;
+  }
+
+  .cardd {
+    width: 60%;
+    height: 75%;
+  }
+}
+
+@media all and (max-width: 662px) {
+  #cards {
+    margin-left: 11%;
+  }
+
+  .cardd {
+    width: 70%;
+    height: 60%;
+  }
+
+  .navbar{
+  width: 100% !important;
+
+}
+
+  .navbar-toggler {
+    margin-right: 50px;
   }
 }
