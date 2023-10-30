@@ -1,6 +1,17 @@
 {
   "characters": [
     {
+      "name": "Е Лань",
+      "price": "400",
+      "desc": " Е Лань 5-звездочная неуловимая и загадочная носительница Гидро элемента. Она неожиданно оказывается посреди гущи событий, столь же мимолетно пропадает и встречается под разными личностями. Острые ощущения помогают ей ощущать себя настоящей. От семьи, что сражалась в Разломе, у нее остался один из двух браслетов, выполняющих функцию связи. Бесстрашная Е Лань работает офицером разведки Цисин на Волю Небес и является непобедимой в играх в кости хозяйкой чайного дома «Яньшан».",
+      "image": "https://i.ibb.co/JrxxxbK/CD025-F9-E-9-FD2-4614-831-D-FC079-E19393-B.jpg",
+      "birthday": "11 ноября",
+      "category": "гидро",
+      "region": "liyue",
+      "weapon": "стрелковое",
+      "id": 13
+    },
+    {
       "name": "Хэйдзо",
       "price": "100",
       "desc": " Хэйдзо 4-звездочный Анемо детектив из комиссии Тэнре. Несмотря на молодой возраст, он проницателен и талантлив. Обладая острым чувством восприятия, врожденной интуицией и ясным умом, Сиканоин Хэйдзо известен нестандартным подходом в процессе расследования преступлений. Кано Нана, его старшая двоюродная сестра, служит в Великом храме Наруками. Хэйдзо основал детективное агентство вместе с Санго, но пробыл там недолго из-за разногласий с ней и после поступил на работу в комиссию Тэнре.",
@@ -12,26 +23,15 @@
       "id": 5
     },
     {
-      "name": "Сегун Райден",
-      "price": "1009",
-      "desc": "Райдэн 5-звездочная Электро Архонт, известная как Вельзевул. Ее превосходительство Наруками Огосе разделена на настоящую личность (Эи) и на куклу (Сегун). Первая запечатана в Мире Эвтюмии, в то время как марионетка стоит на страже Инадзумы. Райдэн Эи имеет свои эмоции, желания и страхи, Сегун же холодна и сурова. Указ об Охоте на Глаза Бога Владычица вечности издала из-за манипуляций Фатуи и Клана Кудзе. Эи доверила хранение Сердца Бога фамильяру Яэ Мико, позволив обменять его. Архонт до сих пор вспоминает кицуне Сайгу, Микоси Тие и сестру Макото, от которой ей достался меч.",
-      "image": "https://i.ibb.co/4jLBH1r/7071-B1-A6-53-C1-47-DD-BB0-F-495052-AA2704.jpg",
-      "birthday": "26 июня ",
-      "category": "электро",
+      "name": "Аято",
+      "price": "1500",
+      "desc": " Аято 5-звездочный Гидро персонаж из Инадзумы. Вежливый и хитрый молодой глава комиссии Ясиро и клана Камисато, не решает проблемы силой и делится выгодой, скрывая истинные цели. После потери родителей на него свалилась ноша в виде клана на грани краха, к чему он уже был готов. Аято поддерживает процветание Инадзумы, пусть не часто бывает среди народа. На нем столько политической работы, что в поместье он возвращается под ночь, но при том находит время на то, чтобы узнавать о новых и интересных вещах. Старший Камисато управляет шпионской организацией Сюмацубан. Хобби Аято – каллиграфия и шахматы.",
+      "image": "https://i.ibb.co/VjNRRLd/52-CE80-FB-1920-4292-A335-088-C440-AACA6.jpg",
+      "birthday": "25 декабря",
+      "category": "гидро",
       "region": "inadzuma",
       "weapon": "одноручное",
-      "id": 3
-    },
-    {
-      "name": "Каэдэхара Кадзуха",
-      "price": "1900",
-      "desc": "Кадзуха 5-звездочный Анемо самурай из падшего рода, против своей воли покинувший родную Инадзуму. Бэй Доу приютила странствующего ронина на флоте Южного Креста «Алькор» в Ли Юэ. За скромностью и мягкостью молодого Каэдэхары скрывается полное невзгод прошлое: когда-то в дворцовой дуэли против Сегуна погиб его друг, чей Глаз Бога он хранит по сей день. Юноша живет в гармонии с миром, его не привлекают ни богатство, ни слава. Если поинтересоваться о способностях ронина, то он назовет наблюдение за облаками и ветром, по которым умеет предсказывать погоду.",
-      "image": "https://i.ibb.co/XWPcH0s/576-E8-C9-B-5266-4447-8-F2-E-2-C96635-FC24-C.jpg",
-      "birthday": "29 октября",
-      "category": "анемо",
-      "region": "inadzuma",
-      "weapon": "одноручное",
-      "id": 4
+      "id": 14
     },
     {
       "name": "Яэ Мико",
@@ -109,28 +109,6 @@
       "region": "liyue",
       "weapon": "одноручное",
       "id": 12
-    },
-    {
-      "name": "Е Лань",
-      "price": "400",
-      "desc": " Е Лань 5-звездочная неуловимая и загадочная носительница Гидро элемента. Она неожиданно оказывается посреди гущи событий, столь же мимолетно пропадает и встречается под разными личностями. Острые ощущения помогают ей ощущать себя настоящей. От семьи, что сражалась в Разломе, у нее остался один из двух браслетов, выполняющих функцию связи. Бесстрашная Е Лань работает офицером разведки Цисин на Волю Небес и является непобедимой в играх в кости хозяйкой чайного дома «Яньшан».",
-      "image": "https://i.ibb.co/JrxxxbK/CD025-F9-E-9-FD2-4614-831-D-FC079-E19393-B.jpg",
-      "birthday": "11 ноября",
-      "category": "гидро",
-      "region": "liyue",
-      "weapon": "стрелковое",
-      "id": 13
-    },
-    {
-      "name": "Аято",
-      "price": "1500",
-      "desc": " Аято 5-звездочный Гидро персонаж из Инадзумы. Вежливый и хитрый молодой глава комиссии Ясиро и клана Камисато, не решает проблемы силой и делится выгодой, скрывая истинные цели. После потери родителей на него свалилась ноша в виде клана на грани краха, к чему он уже был готов. Аято поддерживает процветание Инадзумы, пусть не часто бывает среди народа. На нем столько политической работы, что в поместье он возвращается под ночь, но при том находит время на то, чтобы узнавать о новых и интересных вещах. Старший Камисато управляет шпионской организацией Сюмацубан. Хобби Аято – каллиграфия и шахматы.",
-      "image": "https://i.ibb.co/VjNRRLd/52-CE80-FB-1920-4292-A335-088-C440-AACA6.jpg",
-      "birthday": "25 декабря",
-      "category": "гидро",
-      "region": "inadzuma",
-      "weapon": "одноручное",
-      "id": 14
     },
     {
       "name": "Кокоми ",
@@ -484,9 +462,234 @@
       "age": "19",
       "password": "1234567890",
       "passConf": "1234567890",
-      "isAdmin": true,
+      "isAdmin": false,
       "id": 3
+    },
+    {
+      "username": "Olesya",
+      "age": "17",
+      "password": "1234567890",
+      "passConf": "1234567890",
+      "isAdmin": false,
+      "id": 4
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": 1698626417275,
+      "owner": "Anna",
+      "totalCost": 102900,
+      "products": [
+        {
+          "count": 22,
+          "totalCost": 11000,
+          "productItem": {
+            "name": "Кэ Цин",
+            "price": "500",
+            "image": "https://i.ibb.co/VSkn5sc/36-F18343-71-EC-48-F0-B21-F-0513608-E4-DA8.jpg",
+            "id": 7
+          }
+        },
+        {
+          "count": 222,
+          "totalCost": 88800,
+          "productItem": {
+            "name": "Сайно",
+            "price": "400",
+            "image": "https://i.ibb.co/47Xrh6J/DB4-AD536-2154-4-CC2-8-A81-0-A3-BE95-EBC1-F.jpg",
+            "id": 8
+          }
+        },
+        {
+          "count": 1,
+          "totalCost": 1900,
+          "productItem": {
+            "name": "Каэдэхара Кадзуха",
+            "price": "1900",
+            "image": "https://i.ibb.co/XWPcH0s/576-E8-C9-B-5266-4447-8-F2-E-2-C96635-FC24-C.jpg",
+            "id": 4
+          }
+        },
+        {
+          "count": 1,
+          "totalCost": 1200,
+          "productItem": {
+            "name": "Яэ Мико",
+            "price": "1200",
+            "image": "https://i.ibb.co/hY9Yp0M/C987-EE34-73-C0-4-E4-C-826-F-F8-A48-A47-C951.jpg",
+            "id": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": 1698626775038,
+      "owner": "Anna",
+      "totalCost": 11400,
+      "products": [
+        {
+          "count": 6,
+          "totalCost": 11400,
+          "productItem": {
+            "name": "Каэдэхара Кадзуха",
+            "price": "1900",
+            "image": "https://i.ibb.co/XWPcH0s/576-E8-C9-B-5266-4447-8-F2-E-2-C96635-FC24-C.jpg",
+            "id": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": 1698626959135,
+      "owner": "Anna",
+      "totalCost": 3800,
+      "products": [
+        {
+          "count": 2,
+          "totalCost": 3800,
+          "productItem": {
+            "name": "Каэдэхара Кадзуха",
+            "price": "1900",
+            "image": "https://i.ibb.co/XWPcH0s/576-E8-C9-B-5266-4447-8-F2-E-2-C96635-FC24-C.jpg",
+            "id": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": 1698631777051,
+      "owner": "Anna",
+      "totalCost": 2200,
+      "products": [
+        {
+          "count": 2,
+          "totalCost": 200,
+          "productItem": {
+            "name": "Хэйдзо",
+            "price": "100",
+            "image": "https://i.ibb.co/8r5q3sN/A04-BAA51-78-C6-400-F-90-D2-4-FBEB0208-EBD.jpg",
+            "id": 5
+          }
+        },
+        {
+          "count": 2,
+          "totalCost": 2000,
+          "productItem": {
+            "name": "Сегун Райден",
+            "price": "1000",
+            "image": "https://i.ibb.co/4jLBH1r/7071-B1-A6-53-C1-47-DD-BB0-F-495052-AA2704.jpg",
+            "id": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 1698633707184,
+      "owner": "Anna",
+      "totalCost": 0,
+      "products": []
+    },
+    {
+      "id": 1698636557268,
+      "totalCost": 7000,
+      "products": [
+        {
+          "count": 7,
+          "totalCost": 7000,
+          "productItem": {
+            "name": "Тигнари",
+            "price": "1000",
+            "image": "https://i.ibb.co/SPxL2Gw/A6-D4-F34-D-0-CA8-4-D4-F-AAE4-1130-A23130-B8.jpg",
+            "id": 35
+          }
+        }
+      ]
+    },
+    {
+      "id": 1698637379681,
+      "totalCost": 0,
+      "products": []
+    },
+    {
+      "id": 1698639125626,
+      "owner": "Anna",
+      "totalCost": 1200,
+      "products": [
+        {
+          "count": 2,
+          "totalCost": 800,
+          "productItem": {
+            "name": "Е Лань",
+            "price": "400",
+            "image": "https://i.ibb.co/JrxxxbK/CD025-F9-E-9-FD2-4614-831-D-FC079-E19393-B.jpg",
+            "id": 13
+          }
+        },
+        {
+          "count": 4,
+          "totalCost": 400,
+          "productItem": {
+            "name": "Хэйдзо",
+            "price": "100",
+            "image": "https://i.ibb.co/8r5q3sN/A04-BAA51-78-C6-400-F-90-D2-4-FBEB0208-EBD.jpg",
+            "id": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": 1698639240275,
+      "owner": "Anna",
+      "totalCost": 0,
+      "products": []
+    },
+    {
+      "id": 1698639289732,
+      "owner": "Anna",
+      "totalCost": 0,
+      "products": []
+    },
+    {
+      "id": 1698639367682,
+      "owner": "Anna",
+      "totalCost": 0,
+      "products": []
+    },
+    {
+      "id": 1698647896425,
+      "owner": "Anna",
+      "totalCost": 0,
+      "products": []
+    }
+  ],
+  "news": [
+    {
+      "title": "Sumery event",
+      "date": "2022-12-09",
+      "desc": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae accusantium eveniet autem voluptatum laboriosam tempora suscipit officia nesciunt perspiciatis dolor! Corrupti rerum necessitatibus dignissimos tempora dolor architecto officiis unde amet eveniet soluta sunt tempore quam similique, odit, ipsum consectetur. Asperiores quidem, mollitia non nesciunt perferendis tempore explicabo assumenda, soluta dolore provident quam debitis totam optio, ad deserunt accusamus. Necessitatibus assumenda minus, deleniti quidem libero debitis id nobis vitae officia minima.",
+      "image": "https://dotesports.com/wp-content/uploads/2023/03/genshin-impact-version-3.6.jpg",
+      "id": 10
+    },
+    {
+      "title": "Abyss event",
+      "date": "2019-08-22",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, maxime fugit. Dignissimos, excepturi velit? Molestias inventore tempora consectetur quod dicta voluptatum magni sunt! Voluptatum totam pariatur, odit vero minima, ad nisi ducimus earum debitis, minus delectus nobis reprehenderit repudiandae dolorum alias? Est saepe quae nisi vel nam ducimus minima aspernatur magni velit dolores, explicabo aliquid distinctio! Sed autem eligendi quidem, odio mollitia incidunt at adipisci, ipsam ad sapiente sequi repellat explicabo aliquam doloribus consequatur pariatur! Voluptatibus distinctio pariatur vitae tempore possimus ducimus cumque ut obcaecati voluptas eligendi neque perferendis aliquam suscipit mollitia iure, natus architecto assumenda molestias itaque laudantium! Omnis?",
+      "image": "https://gaming.yugatech.com/wp-content/uploads/2022/05/Genshin-Impact-2.7-Update-720x405.jpg",
+      "id": 11
+    },
+    {
+      "title": "Fleeting colors in flight",
+      "date": "0008-12-21",
+      "desc": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae accusantium eveniet autem voluptatum laboriosam tempora suscipit officia nesciunt perspiciatis dolor! Corrupti rerum necessitatibus dignissimos tempora dolor architecto officiis unde amet eveniet soluta sunt tempore quam similique, odit, ipsum consectetur. Asperiores quidem, mollitia non nesciunt perferendis tempore explicabo assumenda, soluta dolore provident quam debitis totam optio, ad deserunt accusamus. Necessitatibus assumenda minus, deleniti quidem libero debitis id nobis vitae officia minima.",
+      "image": "https://genshinchronicle.com/wp-content/uploads/2022/06/genshin-impact-event-fleeting-colors-in-flight.webp",
+      "id": 12
+    },
+    {
+      "title": "The Morn a Thousand Roses Brings",
+      "date": "2022-12-12",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, maxime fugit. Dignissimos, excepturi velit? Molestias inventore tempora consectetur quod dicta voluptatum magni sunt! Voluptatum totam pariatur, odit vero minima, ad nisi ducimus earum debitis, minus delectus nobis reprehenderit repudiandae dolorum alias? Est saepe quae nisi vel nam ducimus minima aspernatur magni velit dolores, explicabo aliquid distinctio! Sed autem eligendi quidem, odio mollitia incidunt at adipisci, ipsam ad sapiente sequi repellat explicabo aliquam doloribus consequatur pariatur! Voluptatibus distinctio pariatur vitae tempore possimus ducimus cumque ut obcaecati voluptas eligendi neque perferendis aliquam suscipit mollitia iure, natus architecto assumenda molestias itaque laudantium! Omnis?",
+      "image": "https://www.ginx.tv/respawn-cdn/lh5zUHPoeN57Yd2-MvXTvyxNC6qDxbW9a8HhHkjOS3o/fill/1280/0/no/1/aHR0cHM6Ly93d3cuZ2lueC50di91cGxvYWRzMi9HZW5zaGluX0ltcGFjdC8zLjBfdXBkYXRlL0dlbnNoaW5JbXBhY3QzMFByZXZpZXdQYWdlSGVhZGVySG9Zb3ZlcnNlLmpwZw.webp",
+      "id": 13
+    }
+  ]
 }

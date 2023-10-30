@@ -10,15 +10,20 @@ let inpBirthday = document.getElementById("character-birthday");
 let inpCategory = document.getElementById("character-category");
 const adminPanel = document.querySelector("#admin-panel-card");
 
+const adminPanelNews = document.querySelector("#admin-panel-news");
+
 let addForm = document.querySelector("#add-form");
 
+let favorites = document.querySelector("#favorites");
+
 //!cart
-let cartModalBtn = document.querySelector('#cartModal-btn');
-let closeCartBtn = document.querySelector('.btn-close-cart');
-let cartTable = document.querySelector('table');
-let createCartOrderBtn = document.querySelector('#create-cart-order-btn');
-let cleanCartBtn = document.querySelector('#clean-cart-btn')
-let cartTotalCost = document.querySelector('#cart-total-cost');
+let cartModalBtn = document.querySelector("#cartModal-btn");
+
+//!favorites
+let favoritesModalBtn = document.querySelector("#favoritesModal-btn");
+
+//!modal payment
+let modalPayment = document.querySelector(".modal-payment");
 
 // !поиск
 let search = "";
@@ -32,7 +37,6 @@ let currentPage = 1;
 
 //!filtration
 let category = "";
-
 
 //? CRUD characters
 
@@ -55,8 +59,10 @@ function checkUserAccess() {
 function showAdminPanel() {
   if (!checkUserAccess()) {
     adminPanel.style.display = "none";
+    adminPanelNews.style.display = "none"
   } else {
     adminPanel.style.display = "block";
+    adminPanelNews.style.display = "block"
   }
 }
 
@@ -113,9 +119,9 @@ addForm.addEventListener("submit", addProduct);
 //! read
 let sectionCards = document.getElementById("cards");
 async function render(d) {
-  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`
+  let requestAPI = `${CHARACTERS_API}?q=${search}&category=${category}&_page=${currentPage}&_limit=6`;
   if (!category) {
-    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`
+    requestAPI = `${CHARACTERS_API}?q=${search}&_page=${currentPage}&_limit=6`;
   }
 
   let response = await fetch(requestAPI);
@@ -123,7 +129,7 @@ async function render(d) {
   sectionCards.innerHTML = "";
   data.forEach((card) => {
     sectionCards.innerHTML += `
-    <div class="cardd m-5">
+    <div class="cardd m-5 generalCard">
     <div class="content d-flex flex-column">
       <div class="content d-flex align-items-start m-2">
         <img src="${card.image}" class="detailsCard imageCard" alt="${
@@ -155,8 +161,16 @@ async function render(d) {
           Description
         </button>
         <button 
-        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${card.id}">
+        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${
+          card.id
+        }">
           Add to cart
+        </button>
+        <button 
+        class="btn mt-2 btn-dark btn-add-to-cart btn-favorites" id="cart-${
+          card.id
+        }" style="border-radius:14px; width:55px;">
+        <img src="./images/favoritesIcon.svg" alt="favorites">
         </button>
         </div>
     </div>
@@ -172,7 +186,6 @@ render();
 
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("btn-delete")) {
-    console.log(e.target);
     const cardId = e.target.id;
 
     await fetch(`${CHARACTERS_API}/${cardId}`, {
@@ -247,7 +260,6 @@ searchInp.addEventListener("input", () => {
   render();
 });
 
-
 //! voice search
 if ("webkitSpeechRecognition" in window) {
   const startButton = document.getElementById("startButton");
@@ -267,17 +279,16 @@ if ("webkitSpeechRecognition" in window) {
     console.log("Распознавание запущено");
   };
 
-  recognition.onresult = function(event) {
+  recognition.onresult = function (event) {
     const result = event.results[0][0].transcript;
-    console.log('Результат: ', result);
-    search  = result
-   
+    console.log("Результат: ", result);
+    search = result;
+
     recognition.stop();
     startButton.disabled = false;
-    startButton.textContent = 'Начать поиск голосом';
-    render()
+    startButton.textContent = "Начать поиск голосом";
+    render();
   };
-
 
   recognition.onerror = function (event) {
     console.log("Ошибка распознавания: ", event.error);
@@ -292,7 +303,6 @@ if ("webkitSpeechRecognition" in window) {
 } else {
   alert("Web Speech API не поддерживается в этом браузере.");
 }
-
 
 //!pagination
 async function getPagesCount() {
@@ -401,12 +411,12 @@ async function registerUserName(e) {
   }
 
   if (ageInp.value >= 140) {
-    alert("you old");
+    alert("you're old");
     return;
   }
 
   if (ageInp.value <= 14) {
-    alert("you yang");
+    alert("you're young");
     return;
   }
 
@@ -609,5 +619,538 @@ btnCryo.addEventListener("click", () => {
 let btnDendro = document.querySelector(".dendro");
 btnDendro.addEventListener("click", () => {
   body.classList.add("dendro-bg");
-})
+});
 
+// !cart logic
+let closeCartBtn = document.querySelector(".btn-close-cart");
+let cartTable = document.querySelector(".cartTable");
+let createCartOrderBtn = document.querySelector("#create-cart-order-btn");
+let cleanCartBtn = document.querySelector("#clean-cart-btn");
+let cartTotalCost = document.querySelector("#cart-total-cost");
+
+//находим id элемента по которому кликаем
+async function getCharacterIdByClick() {
+  document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-cart")) {
+      let productIdSplited = e.target.id.split("-")[1];
+      let res = await fetch(`${CHARACTERS_API}/${productIdSplited}`);
+      let data = await res.json();
+      let id = data.id;
+      return id;
+    }
+  });
+}
+
+function initStorage() {
+  if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", "[]");
+  }
+  if (!localStorage.getItem("productItem")) {
+    localStorage.setItem("productItem", "[]");
+  }
+}
+initStorage();
+
+function setCharacterToLocalStorageOnClick() {
+  document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-cart")) {
+      let productIdSplited = e.target.id.split("-")[1];
+      let res = await fetch(`${CHARACTERS_API}/${productIdSplited}`);
+      let data = await res.json();
+      let characterObj = {
+        name: data.name,
+        price: data.price,
+        image: data.image,
+        id: data.id,
+      };
+      localStorage.setItem("productItem", JSON.stringify(characterObj));
+      addProductToCart();
+    }
+  });
+}
+setCharacterToLocalStorageOnClick();
+
+function getClickedCharacterFromLocalStorage() {
+  let obj = JSON.parse(localStorage.getItem("productItem"));
+  return obj;
+}
+
+// Функция для добавления продукта в корзину
+function addProductToCart(e) {
+  let cartOwner = JSON.parse(localStorage.getItem("user"));
+
+  // Получаем ID продукта, на который кликнули
+  let productId = getCharacterIdByClick();
+  // Запрашиваем у пользователя количество продукта в корзине
+  let cartProductCount = +prompt("Enter product count for cart");
+
+  let productObj = getClickedCharacterFromLocalStorage();
+
+  let productCartObj = {
+    count: cartProductCount, // Количество продукта в корзине
+    totalCost: +productObj.price * cartProductCount, // Общая стоимость 1 продукта
+    productItem: productObj, // Сам продукт
+  };
+  // Получаем текущее состояние корзины из localStorage
+  let cartObj = JSON.parse(localStorage.getItem("cart"));
+  // Если корзина уже существует, добавляем в неё новый продукт
+  if (cartObj) {
+    addNewProductToCart(productCartObj);
+    cartRender();
+  } else {
+    // Если корзины ещё нет, создаем новую корзину и добавляем в неё продукт
+    createCartInLocalStorage();
+    addNewProductToCart(productCartObj);
+    cartRender();
+  }
+}
+
+// Функция для создания объекта корзины и сохранения его в localStorage
+function createCartInLocalStorage() {
+  // Получаем информацию о владельце корзины из localStorage (пользователе)
+  let cartOwner = JSON.parse(localStorage.getItem("user"));
+
+  let cartObj = {
+    id: Date.now(),
+    owner: cartOwner.username,
+    totalCost: 0,
+    products: [],
+  };
+  localStorage.setItem("cart", JSON.stringify(cartObj));
+}
+createCartInLocalStorage();
+// Функция для добавления нового продукта в корзину
+function addNewProductToCart(productCartObj) {
+  let cartObj = JSON.parse(localStorage.getItem("cart"));
+
+  cartObj.products.push(productCartObj);
+  cartObj.totalCost = countCartTotalCost(cartObj.products);
+  localStorage.setItem("cart", JSON.stringify(cartObj));
+}
+
+// Функция для подсчета общей стоимости продуктов в корзине
+function countCartTotalCost(products) {
+  let cartTotalCost = products.reduce((acc, currentItem) => {
+    return acc + currentItem.totalCost;
+  }, 0);
+  return cartTotalCost;
+}
+
+// Функция для отображения содержимого корзины
+function cartRender() {
+  let cartObj = JSON.parse(localStorage.getItem("cart"));
+  if (!cartObj) {
+    // Если корзины нет, выводим сообщение об отсутствии продуктов
+    cartTable.innerHTML = "<h3>No products in cart!</h3>";
+    cartTotalCost.innerText = "Total cost: 0$";
+    return;
+  }
+
+  cartTable.innerHTML = `
+        <tr>
+            <th class="border border-dark">Image</th>
+            <th class="border border-dark">Title</th>
+            <th class="border border-dark">Count</th>
+            <th class="border border-dark">Price</th>
+            <th class="border border-dark">Total</th>
+            <th class="border border-dark">Delete</th>
+        </tr>
+    `;
+  cartObj.products.forEach((cartProduct) => {
+    // Для каждого продукта в корзине отображаем его информацию
+    cartTable.innerHTML += `
+        <tr class="h-100">
+            <td class="border border-dark">
+            <img src="${cartProduct.productItem.image}" alt="error:(" class="w-100 h-100">
+            </td>
+            <td class="border border-dark">${cartProduct.productItem.name}</td>
+            <td class="border border-dark">${cartProduct.count}</td>
+            <td class="border border-dark">${cartProduct.productItem.price}</td>
+            <td class="border border-dark">${cartProduct.totalCost}</td>
+            <td class="border border-dark">
+            <button class="btn btn-danger del-cart-btn" id="cart-product-${cartProduct.productItem.id}">DELETE</button>
+            </td>
+        </tr>
+        `;
+  });
+  cartTotalCost.innerText = `Total cost: ${cartObj.totalCost}$`;
+  // Добавляем событие "click" на кнопки удаления продуктов из корзины
+  addDeleteEventForCartProduct();
+}
+cartRender();
+
+// Функция для удаления продукта из корзины
+function deleteProductFromCart(e) {
+  let productId = e.target.id.split("-");
+  productId = productId[productId.length - 1];
+  // Получаем текущее состояние корзины из localStorage
+  let cartObj = JSON.parse(localStorage.getItem("cart"));
+  // Фильтруем список продуктов в корзине, оставляя только те, которые не удаляем
+  cartObj.products = cartObj.products.filter(
+    (cartProduct) => cartProduct.productItem.id != productId
+  );
+  // Пересчитываем общую стоимость корзины
+  cartObj.totalCost = countCartTotalCost(cartObj.products);
+  if (cartObj.products.length === 0) {
+    // Если больше нет продуктов в корзине, удаляем корзину из localStorage
+    localStorage.removeItem("cart");
+  } else {
+    // Иначе сохраняем обновленное состояние корзины в localStorage
+    localStorage.setItem("cart", JSON.stringify(cartObj));
+  }
+  // Повторно отображаем содержимое корзины
+  cartRender();
+}
+
+// Функция для добавления события "click" на кнопки удаления продуктов из корзины
+function addDeleteEventForCartProduct() {
+  let delCartProductBtns = document.querySelectorAll(".del-cart-btn");
+  delCartProductBtns.forEach((btn) =>
+    btn.addEventListener("click", deleteProductFromCart)
+  );
+}
+
+const ORDERS_API = "http://localhost:8001/orders";
+
+// Функция для отправки заказа на сервер
+async function sendOrder(cartObj) {
+  await fetch(ORDERS_API, {
+    method: "POST",
+    body: JSON.stringify(cartObj),
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+}
+
+// Функция для создания заказа
+async function createOrder() {
+  // Получаем текущее состояние корзины из localStorage
+  let cartObj = JSON.parse(localStorage.getItem("cart"));
+  if (!cartObj) {
+    alert("No products in cart!");
+    return;
+  }
+  // Отправляем заказ на сервер и очищаем корзину
+  await sendOrder(cartObj);
+  localStorage.removeItem("cart");
+  cartRender();
+}
+
+// Обработчик клика по кнопке "Create Order"
+createCartOrderBtn.addEventListener("click", () => {
+  createOrder();
+  modalPayment.classList.add("modal-payment-flex");
+});
+
+cleanCartBtn.addEventListener("click", () => {
+  // Удаляем корзину из localStorage и обновляем отображение корзины
+  localStorage.removeItem("cart");
+  cartRender();
+});
+cartRender();
+
+//!favorites logic
+let closeFavoritesBtn = document.querySelector(".btn-close-favorites");
+let favoritesTable = document.querySelector(".favoritesTable");
+let cleanFavoritesBtn = document.querySelector("#clean-favorites-btn");
+
+//находим id элемента по которому кликаем
+async function fgetCharacterIdByClick() {
+  document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-favorites")) {
+      let productIdSplited = e.target.id.split("-")[1];
+      let res = await fetch(`${CHARACTERS_API}/${productIdSplited}`);
+      let data = await res.json();
+      let id = data.id;
+      return id;
+    }
+  });
+}
+
+function finitStorage() {
+  if (!localStorage.getItem("favorites")) {
+    localStorage.setItem("favorites", "[]");
+  }
+  if (!localStorage.getItem("favoritesItem")) {
+    localStorage.setItem("favoritesItem", "[]");
+  }
+}
+finitStorage();
+
+function fsetCharacterToLocalStorageOnClick() {
+  document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-favorites")) {
+      let productIdSplited = e.target.id.split("-")[1];
+      let res = await fetch(`${CHARACTERS_API}/${productIdSplited}`);
+      let data = await res.json();
+      let characterObj = {
+        name: data.name,
+        price: data.price,
+        image: data.image,
+        id: data.id,
+      };
+      localStorage.setItem("favoritesItem", JSON.stringify(characterObj));
+      faddProductToCart();
+    }
+  });
+}
+fsetCharacterToLocalStorageOnClick();
+
+function fgetClickedCharacterFromLocalStorage() {
+  let obj = JSON.parse(localStorage.getItem("favoritesItem"));
+  return obj;
+}
+
+// Функция для добавления продукта в корзину
+function faddProductToCart(e) {
+  let cartOwner = JSON.parse(localStorage.getItem("user"));
+
+  // Получаем ID продукта, на который кликнули
+  let productId = fgetCharacterIdByClick();
+  // Запрашиваем у пользователя количество продукта в корзине
+  let cartProductCount = +prompt("Enter product count for cart");
+
+  let productObj = fgetClickedCharacterFromLocalStorage();
+
+  let productCartObj = {
+    count: cartProductCount, // Количество продукта в корзине
+    totalCost: +productObj.price * cartProductCount, // Общая стоимость 1 продукта
+    productItem: productObj, // Сам продукт
+  };
+  // Получаем текущее состояние корзины из localStorage
+  let cartObj = JSON.parse(localStorage.getItem("favorites"));
+  // Если корзина уже существует, добавляем в неё новый продукт
+  if (cartObj) {
+    faddNewProductToCart(productCartObj);
+    fcartRender();
+  } else {
+    // Если корзины ещё нет, создаем новую корзину и добавляем в неё продукт
+    fcreateCartInLocalStorage();
+    faddNewProductToCart(productCartObj);
+    fcartRender();
+  }
+}
+
+// Функция для создания объекта корзины и сохранения его в localStorage
+function fcreateCartInLocalStorage() {
+  // Получаем информацию о владельце корзины из localStorage (пользователе)
+  let cartOwner = JSON.parse(localStorage.getItem("user"));
+
+  let cartObj = {
+    id: Date.now(),
+    owner: cartOwner.username,
+    totalCost: 0,
+    products: [],
+  };
+  localStorage.setItem("favorites", JSON.stringify(cartObj));
+}
+fcreateCartInLocalStorage();
+// Функция для добавления нового продукта в корзину
+function faddNewProductToCart(productCartObj) {
+  let cartObj = JSON.parse(localStorage.getItem("favorites"));
+
+  cartObj.products.push(productCartObj);
+  cartObj.totalCost = fcountCartTotalCost(cartObj.products);
+  localStorage.setItem("favorites", JSON.stringify(cartObj));
+}
+
+// Функция для подсчета общей стоимости продуктов в корзине
+function fcountCartTotalCost(products) {
+  let cartTotalCost = products.reduce((acc, currentItem) => {
+    return acc + currentItem.totalCost;
+  }, 0);
+  return cartTotalCost;
+}
+
+// Функция для отображения содержимого корзины
+function fcartRender() {
+  let cartObj = JSON.parse(localStorage.getItem("favorites"));
+  if (!cartObj) {
+    // Если корзины нет, выводим сообщение об отсутствии продуктов
+    favoritesTable.innerHTML = "<h3>No products in favorites!</h3>";
+    return;
+  }
+
+  favoritesTable.innerHTML = `
+        <tr>
+            <th class="border border-dark">Image</th>
+            <th class="border border-dark">Title</th>
+            <th class="border border-dark">Count</th>
+            <th class="border border-dark">Price</th>
+            <th class="border border-dark">Total</th>
+            <th class="border border-dark">Delete</th>
+        </tr>
+    `;
+  cartObj.products.forEach((cartProduct) => {
+    // Для каждого продукта в корзине отображаем его информацию
+    favoritesTable.innerHTML += `
+        <tr class="h-100">
+            <td class="border border-dark">
+            <img src="${cartProduct.productItem.image}" alt="error:(" class="w-100 h-100">
+            </td>
+            <td class="border border-dark">${cartProduct.productItem.name}</td>
+            <td class="border border-dark">${cartProduct.count}</td>
+            <td class="border border-dark">${cartProduct.productItem.price}</td>
+            <td class="border border-dark">${cartProduct.totalCost}</td>
+            <td class="border border-dark">
+            <button class="btn btn-danger del-favorites-btn" id="cart-product-${cartProduct.productItem.id}">DELETE</button>
+            </td>
+        </tr>
+        `;
+  });
+  // Добавляем событие "click" на кнопки удаления продуктов из корзины
+  faddDeleteEventForCartProduct();
+}
+fcartRender();
+
+// Функция для удаления продукта из корзины
+function fdeleteProductFromCart(e) {
+  let productId = e.target.id.split("-");
+  productId = productId[productId.length - 1];
+  // Получаем текущее состояние корзины из localStorage
+  let cartObj = JSON.parse(localStorage.getItem("favorites"));
+  // Фильтруем список продуктов в корзине, оставляя только те, которые не удаляем
+  cartObj.products = cartObj.products.filter(
+    (cartProduct) => cartProduct.productItem.id != productId
+  );
+  // Пересчитываем общую стоимость корзины
+  cartObj.totalCost = fcountCartTotalCost(cartObj.products);
+  if (cartObj.products.length === 0) {
+    // Если больше нет продуктов в корзине, удаляем корзину из localStorage
+    localStorage.removeItem("favorites");
+  } else {
+    // Иначе сохраняем обновленное состояние корзины в localStorage
+    localStorage.setItem("favorites", JSON.stringify(cartObj));
+  }
+  // Повторно отображаем содержимое корзины
+  fcartRender();
+}
+
+// Функция для добавления события "click" на кнопки удаления продуктов из корзины
+function faddDeleteEventForCartProduct() {
+  let delCartProductBtns = document.querySelectorAll(".del-favorites-btn");
+  delCartProductBtns.forEach((btn) =>
+    btn.addEventListener("click", fdeleteProductFromCart)
+  );
+}
+
+cleanFavoritesBtn.addEventListener("click", () => {
+  // Удаляем корзину из localStorage и обновляем отображение корзины
+  localStorage.removeItem("favorites");
+  fcartRender();
+});
+fcartRender();
+
+//! modal payment logic
+
+let btnSubmPay = document.querySelector(".btn-submit-modal-payment");
+let inpCardNum = document.querySelector("#cardNumber");
+let inpCardName = document.querySelector("#cardName");
+let inpCardCVV = document.querySelector("#cardCvv");
+
+btnSubmPay.addEventListener("click", () => {
+  modalPayment.style.display = "none";
+  inpCardNum.value = "";
+  inpCardName.value = "";
+  inpCardCVV.value = "";
+});
+
+//! news CRD
+
+let inpNewsTitle = document.getElementById("news-title");
+let inpNewsDesc = document.getElementById("news-desc");
+let inpNewsImage = document.getElementById("news-image");
+let inpNewsDate = document.getElementById("news-date");
+
+let addNewsForm = document.querySelector("#news-add-form");
+
+let NEWS_API = "http://localhost:8001/news";
+
+async function addNews(e) {
+  e.preventDefault();
+  if (
+    !inpNewsTitle.value.trim() ||
+    !inpNewsDesc.value.trim() ||
+    !inpNewsImage.value.trim() ||
+    !inpNewsDate.value.trim()
+  ) {
+    alert("Some inputs are empty!");
+    return;
+  }
+
+  let cardObj = {
+    title: inpNewsTitle.value,
+    date: inpNewsDate.value,
+    desc: inpNewsDesc.value,
+    image: inpNewsImage.value,
+  };
+
+  await fetch(NEWS_API, {
+    method: "POST",
+    body: JSON.stringify(cardObj),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  });
+
+  inpNewsTitle.value = "";
+  inpNewsDate.value = "";
+  inpNewsDesc.value = "";
+  inpNewsImage.value = "";
+  renderNews();
+}
+
+addNewsForm.addEventListener("submit", addNews);
+
+//! read
+let sectionNews = document.getElementById("news");
+async function renderNews(d) {
+  let response = await fetch(NEWS_API);
+  let data = await response.json();
+  sectionNews.innerHTML = "";
+  data.forEach((card) => {
+    sectionNews.innerHTML += `<div class="cardNews content d-flex flex-column m-5">
+    <div class="imageNews"><img src="${card.image}" class="detailsCard imageCard" alt="${
+      card.image
+    }"/></div>
+     <div class="contentNews">
+       
+         <span class="titleNews">
+          <h5 style="font-size: 30px" class="card-title">${card.title}</h5>
+         </span>
+       
+   
+       <p class="descNews">
+        <p class="card-text">
+          Date: ${card.date}
+        <br>
+          ${card.desc}
+       </p>
+       </p>
+       ${
+        checkUserAccess()
+          ? `<button class="mb-2 btn btn-danger btn-delete-news" id="${card.id}">
+          Delete
+        </button>`
+          : ""
+      }
+     </div>
+   </div>`
+  });
+}
+
+renderNews();
+
+//! delete
+
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btn-delete-news")) {
+    const cardId = e.target.id;
+
+    await fetch(`${NEWS_API}/${cardId}`, {
+      method: "DELETE",
+    });
+    renderNews();
+  }
+});
