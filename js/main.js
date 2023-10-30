@@ -154,28 +154,6 @@ async function render(d) {
           Edit
          </button>`
           : ""
-      }${
-        showCardButton()?
-        `<button class="btn mt-2 btn-light btnDesc" id="${
-          card.id
-        }" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-          Description
-        </button>
-        <button 
-        class="btn mt-2 btn-light btn-add-to-cart btn-cart" id="cart-${
-          card.id
-        }">
-          Add to cart
-        </button>
-        <button 
-        class="btn mt-2 btn-dark btn-add-to-cart btn-favorites" id="cart-${
-          card.id
-        }" style="border-radius:14px; width:55px;">
-        <img src="./images/favoritesIcon.svg" alt="favorites">
-        </button>
-        </div>
-    </div>
-  </div>`: ""
       }
         <button class="btn mt-2 btn-light btnDesc" id="${
           card.id
