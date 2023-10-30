@@ -1405,45 +1405,55 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: whitesmoke;
+  background-color: #3333;
+  /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlJ3vc8XPWyRCI3p2Bjg-nquBz6Cbj3Suign0JmdTRRk73_KdeJSyI_tvT3t82i9mw4v8&usqp=CAU"); */
   width: 30%;
   gap: 40px;
   border-radius: 8px;
+  border: 2px solid ;
   margin: 30px auto;
+  color: #fff;
 }
 
 .modalka h2 {
   font-size: 400%;
   font-family: sans-serif;
-  color: #6a5acd;
+  color:#50178a;
   font-weight: 550;
   margin-bottom: 2%;
 }
 
 .loginSubmit-button {
-  background-color: #6a5acd;
-  border-color: #6a5acd;
+  background-color:#50178a;
+  border-color:#50178a;
 }
 
 .loginSubmit-button:hover {
   background-color: transparent;
-  color: #6a5acd;
+  color:#50178a;
 }
 
+<<<<<<< Updated upstream
 #registerBtn-css{
   background-color: #6a5acd;
   border-color: #6a5acd;
+=======
+#registerBtn-css {
+  background-color:#50178a;
+  border-color:#50178a;
+>>>>>>> Stashed changes
 }
 
 #registerBtn-css:hover {
   background-color: transparent;
-  color: #6a5acd;
+  color:#50178a;
 }
 
 .modalka input {
   margin-top: 5%;
   width: 100%;
   height: 40%;
+  border-radius: 10px;
 }
 
 #registerForm {
