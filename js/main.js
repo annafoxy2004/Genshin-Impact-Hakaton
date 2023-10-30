@@ -24,6 +24,8 @@ let favoritesModalBtn = document.querySelector("#favoritesModal-btn");
 
 //!modal payment
 let modalPayment = document.querySelector(".modal-payment");
+let loveModalBtn = document.querySelector('#favoritesModal-btn');
+let basketBtn = document.querySelector("#cartModal-btn")
 
 // !поиск
 let search = "";
@@ -52,7 +54,7 @@ initStorege();
 
 function checkUserAccess() {
   let user = JSON.parse(localStorage.getItem("user"));
-  if (user) return user.isAdmin;
+  if (user) return(user.isAdmin);
   return false;
 }
 
@@ -476,12 +478,14 @@ function checkLoginLogoutStatus() {
     loginBtn.style.display = "block";
     logoutBtn.style.display = "none";
     showUsername.innerText = "No user";
-    cartModalBtn.style.display = "none";
+    loveModalBtn.style.display = "none";
+    basketBtn.style.display = "none"
   } else {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
     showUsername.innerText = JSON.parse(user).username;
-    cartModalBtn.style.display = "block";
+    loveModalBtn.style.display = "block";
+    basketBtn.style.display = "block"
   }
 
   showAdminPanel();
@@ -1140,5 +1144,112 @@ document.addEventListener("click", async (e) => {
       method: "DELETE",
     });
     renderNews();
+  }
+});
+
+// Отзывы
+
+const COMMENT_API = "http://localhost:8001/comments"
+
+const modalCommentsBg = document.querySelector("#modal-comments-bg")
+const inpCommen = document.querySelector("#inputComment")
+const formComment = document.querySelector("#form-comment-modal-id")
+let userComentCont = document.querySelector("#userComentContainer")
+
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("commentsBtn")){
+    modalCommentsBg.style.display = "flex";
+  }
+})
+
+async function addComment(e) {
+  e.preventDefault();
+  if(!inpCommen.value.trim()){
+    alert("You can't send emptu messege")
+    return;
+  }
+
+  let user = localStorage.getItem("user");
+  const showName = showUsername.innerText = JSON.parse(user).username
+  
+  let objCommen = {
+    user: showName,
+    comment: inpCommen.value,
+  }
+
+  await fetch(`${COMMENT_API}`, {
+    method: "POST",
+    body: JSON.stringify(objCommen),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  });
+
+  inpCommen.value = ""
+  renderComment()
+}
+formComment.addEventListener("submit", addComment);
+
+async function renderComment() {
+  let responseCom = await fetch(COMMENT_API);
+  let dataCom = await responseCom.json();
+  userComentCont.innerHTML = "";
+  dataCom.forEach((commen) => {
+    userComentCont.innerHTML += `
+    <h3 style="font-size: 120%;">${commen.user}</h3>
+    <p>${commen.comment}</p>
+    `
+  })
+}
+renderComment()
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("btnCommentClose")){
+    modalCommentsBg.style.display = "none"
+  }
+})
+
+const deskCloseBtn = document.querySelector("#buttonDeskClose");
+
+document.addEventListener("click", (e) =>{
+  if(e.target.classList.contains("btnDeskClose")){
+    modalDeckBg.style.display = "none"
+  }
+})
+
+
+// description
+
+const modalDeckBg = document.querySelector("#modal-deck-bg-log");
+const btnDesk = document.querySelector(".btnDesc");
+
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("btnDesc")) {
+    modalDeckBg.style.display = "flex";
+
+  const descId = e.target.id;
+  console.log(descId)
+  let response = await fetch(`${CHARACTERS_API}/${descId}`);
+  let deskObj = await response.json();
+
+  modalDeckBg.innerHTML = `
+      <div class="modal-descrip-body">
+              <div class="modal-desc-img" style="width: 35%; height: 100%; background-color: rgb(62, 58, 141);">
+              <img src="${deskObj.image}" alt="${deskObj.image}">
+              </div>
+              <div class="modal-desc-coments" style="width: 65%; height: 100%;">
+                <div class="desck-info" style="color: aliceblue;">
+                  <button class="btnDeskClose" id="buttonDeskClose">X</button>
+                  <h2>${deskObj.name}</h2>
+                  <p>${deskObj.desc}</p>
+                  <p>Элемент: ${deskObj.category}</p>
+                  <p>Оружие: ${deskObj.weapon}</p>
+                  <p>Регион: ${deskObj.region}</p>
+                  <p>Цена: ${deskObj.price}$</p>
+                </div>
+                <button class="commentsBtn">Отзывы</button>
+  
+              </div>
+            </div>
+      `;
   }
 });
